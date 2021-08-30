@@ -1,0 +1,9 @@
+<launch>
+
+<rosparam file="$(find robot_arm_description)/launch/controller.yaml" command="load"/>
+<node args="base_rev_position_controller Wrist_joint_position_controller Shoulder_joint_position_controller Elbow_joint_position_controller Hand_rev_position_controller joint_state_controller " name="controller_spawner" ns="robot_arm" output="screen" pkg="controller_manager" respawn="false" type="spawner"/>
+<node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
+  <remap from="/joint_states" to="/robot_arm/joint_states"/>
+</node>
+
+</launch>
