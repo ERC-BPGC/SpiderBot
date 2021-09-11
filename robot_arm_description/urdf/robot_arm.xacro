@@ -4,6 +4,7 @@
 <xacro:include filename="$(find robot_arm_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find robot_arm_description)/urdf/robot_arm.trans" />
 <xacro:include filename="$(find robot_arm_description)/urdf/robot_arm.gazebo" />
+<link name="dummy"></link>
 <link name="base_link">
   <inertial>
     <origin rpy="0 0 0" xyz="0.0035168152143238885 -1.666668598250173e-05 0.028012530522048572"/>
@@ -130,6 +131,10 @@
   </collision>
 </link>
 
+<joint name="dummy_joint" type="fixed">
+  <parent link="dummy"/>
+  <child link="base_link"/>
+</joint>
 <joint name="base_rev" type="continuous">
   <origin rpy="0 0 0" xyz="0.0 0.0 0.057"/>
   <parent link="base_link"/>
