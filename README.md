@@ -10,7 +10,7 @@ We found the library of tinyik https://github.com/lanius/tinyik
 The reason to use it were :
  1)It was simple to use and focussed on inverse kinematics 
 
- 2)Most other libraries were much more verstaile, but those       functions were not needed for our purpose
+ 2)Most other libraries were much more verstaile, but those       functions were not needed for our purpose.
 
 
  We applied it in the mobile_manipulator to calculate the joint angles from the end effector position , this can be found in the scripts in arm_to_goal.
