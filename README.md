@@ -1,5 +1,3 @@
-# SpiderBot
-
 Official repository of Project SpiderBot.
 
 Project is currently under development and this repository will serve as a place to work on the software stack of the project.
