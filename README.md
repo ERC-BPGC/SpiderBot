@@ -174,7 +174,7 @@ cpg_j1 and cpg_j2 are the publishers
 
 To run these files use code given below
 ```{=html}
-*rosrun cpg_test cpg_j1.py*
+rosrun cpg_test cpg_j1.py
 ```
 
 ```{=html}
