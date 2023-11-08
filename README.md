@@ -1,18 +1,17 @@
-**Project Spiderbot**
+# **Project Spiderbot**
 
 Official repository of Project SpiderBot.
 
 Project is currently under development and this repository will serve as
 a place to work on the software stack of the project.
 
-Current branch division:
+## Current branch division:
 
-main - Latest stable code of the project. dev - Development code of the
-project of the hexapod system. test - Testing branch for trying out
-concepts and features on other simpler systems like robotic arm and
-quadruped.
+`main` - Latest stable code of the project.<br/> 
+`dev` - Development code of the project of the hexapod system. <br/>
+`test` - Testing branch for trying out concepts and features on other simpler systems like robotic arm and quadruped.<br/>
 
-**Introduction**
+## **Introduction**
 
 The SpiderBot project aims to create an advanced robotic platform
 capable of agile exploration and surveillance in dynamic and challenging
@@ -25,7 +24,7 @@ validation, SpiderBot will provide a reliable and adaptable solution for
 a wide range of real-world applications, contributing to advancements in
 robotics and enhancing human capabilities.
 
-**Why a Hexapod?**
+## **Why a Hexapod?**
 
  Six legs yield extra stability and maneuverability, especially when
 climbing something like rubble. With 4 or less legs, the robot needs to
@@ -40,7 +39,7 @@ controlling such a robot, even though it has more limbs, is actually
 easy.More than six consumes a lot of power and moreover the gait
 patterns are complex .The more the legs the more complex it becomes
 
-**Uses**
+## **Uses**
 
 Following are few places where spiderbot can used:
 
@@ -78,12 +77,12 @@ Following are few places where spiderbot can used:
     space missions, both for planetary exploration and satellite
     maintenance.
 
-**Mechanical design**
+## **Mechanical design**
 
 All the legs are 3D printed and the base is made up of 5.5mm of plywood.
 The bot has a covering of Acrylic.
 
-**Dimensions**
+### **Dimensions**
 
 Base-Hexagon of side 140 MM
 
@@ -96,28 +95,28 @@ LEG 174 MM
 
 Hip to Base 66 mm
 
-**Electronics**
+## **Electronics**
 
-**List of Components used**
+### **List of Components used**
 
 Single pole MCB, 10A buck converter, 10amg wires, 35kg-cm servo (RKI
 1202), 16kg-cm servo (RKI 1206), Lippo battery 4200mah, Raspberry pi 4,2
 Arduino Mega
 
-**PCB design**
+### **PCB design**
 
 Trace widths used: 188.89mils, 13.79mils, 6mils Components: Arduino,
 Male-Male Headers, XT-60 connector Current rating: 20A
 Copper weight: 2oz
 
-**Software**
+### **Software**
 
 We have used ROS (Robot Operating system) framework. The programming
 language used is Python
 
 Rosserial is used for communication between the raspi and arduino
 
-**Rosserial**
+### **Rosserial**
 
 Rosserial is a protocol to send data through a serial interface. In a
 client-server rosserial implementation, a rosserial-server is a computer
@@ -127,7 +126,7 @@ messages. rosserial-server in this implementation is a publishing node
 while rosserial-client is a subscriber node, although this can sometimes
 be the other way round.
 
-**Requirements**
+## **Requirements**
 
 -   *ROS Environment*: First, you need to have a working ROS environment
     on your computer. This involves installing ROS and setting up a ROS
@@ -135,10 +134,10 @@ be the other way round.
 
 -   *Install Rosserial*: Install the Rosserial package on your ROS
     computer by running the appropriate command
-```{=html}
+```bash
 sudo apt-get install ros-\<distro\>-rosserial-arduino
 ```
-```{=html}
+```bash
 sudo apt-get install ros-\<distro\>-rosserial-python
 ```
 
@@ -158,50 +157,51 @@ sudo apt-get install ros-\<distro\>-rosserial-python
 
 In our workspace directory it is present in
 
-catkin_ws\\rosserial
+```~/catkin_ws/rosserial```
 
-**Running the code**
+## **Running the code**
 
 Run the given line to launch the Arduino
 
+```bash 
 roslaunch arduino.launch
+```
 
-**Running the cpg code**
+## **Running the cpg code**
 
-catkin_ws\\src\\cpg_test\\src contains the code files
+```catkin_ws/src/cpg_test/src``` contains the code files
 
 cpg_j1 and cpg_j2 are the publishers
 
 To run these files use code given below
-```{=html}
+```bash
 rosrun cpg_test cpg_j1.py
 ```
 
-```{=html}
+```bash
 rosrun cpg_test cpg_j2.py
 ```
 
 cpg_sub is the subscriber.To run the file use the code given below
-```{=html}
+```bash
 rosrun cpg_test cpg_sub.py
 ```
 
 The cpg_j1_twist and cpg_j2_twist is for the testing the twisting motion
 
-**Running the joystick code**
+## **Running the joystick code**
 
-catkin_ws\\src\\controller\\src
+```catkin_ws/src/controller/src```
 
 fileread_joy contains the code.The remaining text files contain
 hardcoded angles required for different kinds of movements
 
 To Run it
-```{=html}
+```bash
 rosrun controller fileread_joy.py
 ```
-*rosrun controller fileread_joy.py*
 
-**Future goals**
+## **Future goals**
 
 Implementing CPG , improving the mechanical design to make the bot
 lighter Using RL to developing non slipping motion. Last but not the
