@@ -4,12 +4,6 @@ This page contains everything you need to know about Spiderbot electronics as we
 
 # Contents
 
-<style>
-    ul {
-        list-style: none;
-    }
-</style>
-
 * [Progress](/electronics/docs/general/progress.md)
 * [Current Plans]()
 * [Microcontrollers]()
