@@ -5,7 +5,7 @@ This page contains everything you need to know about Spiderbot electronics as we
 # Contents
 
 * [Progress](/electronics/docs/general/progress.md)
-* [Current Plans]()
+* [Current Plans](/electronics/docs/general/current_plans.md)
 * [Microcontrollers]()
     * [Arduino]()
     * [STM32]()
