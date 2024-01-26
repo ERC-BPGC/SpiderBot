@@ -10,7 +10,7 @@ The Spiderbot hardware was assembled for the first time during Quark 2022 displa
 - The motors used were RKI-1206 16 kg-cm [servo motors](/electronics/docs/motors/servo_motor.md). 
 - In total, Spiderbot had 18 servo motors (3 for each leg). 
 - The motors were controlled by 2 [Arduino](/electronics/docs/microcontrollers/arduino.md) Mega R3 boards (each board controlling 3 legs or 9 motors). 
-- The Arduino was given angles by the Raspberry Pi 4 Model B which was used as the onboard computer.
+- The Arduino was given angles by the Raspberry Pi 4 Model B which was used as the onboard computer. The Raspberry Pi is powered by a powerbank.
 - The motor connections were done by hand soldering on a Perfboard.
 
 ### Circuit Block Diagram
@@ -19,6 +19,7 @@ The Spiderbot hardware was assembled for the first time during Quark 2022 displa
 
 - The LM2596 provides limited output current. 
 - Current drawn by servo motors is proportional to the load. Not sure if any load or current calculations were done.
+- A serparate powerbank is being used for the raspberry pi which adds to the weight.
 
 ### Consequence
 
@@ -68,3 +69,37 @@ However, this is possible only if all servo motors are carrying maximum load, wh
 - RKI-1202: https://robokits.co.in/motors/rc-servo-motor/ultra-torque-dual-shaft-metal-gear-35kgcm-coreless-servo-w-t-acc
 
 ## Version 1.2
+
+During the semester break, our task was to design a [PCB](/electronics/docs/pcb) since resoldering perfboard was tedious. After this, the Spiderbot was able to stand and move with more stability.
+
+### Circuit Schematic and Layout
+
+### Problems
+
+- We still have the common buck converter output problem.
+- We don't know how much current is being drawn in circuit.
+- We are still using a separate powerbank for the Raspberry Pi.
+- The wiring is a mess.
+- The PCB is too big to fit inside.
+- The wired connections are unreliable.
+- The motors don't seem to be getting enough power.
+
+## Version 2.0
+
+All the wiring is done between battery and the buck converter. So if we eliminate the buck converter from the circuit then we can eliminate all the wiring we have.
+
+The buck converter is used to step down the battery voltage to 8.4V for the motors. The voltage rating for the motors is 6-8.4V. So we can just use a 7.4V battery.
+
+The maximum area in the PCB is taken by the Arduino board. In order to reduce this area, we decided to use embedded microcontroller ic. We chose the [STM32F103C8T6](/electronics/docs/microcontroller/stm32.md) microcontroller which is used in the BluePill development board. We used 6 of these ICs (1 for each leg) to implement distributed control.
+
+We designed a 4 layer PCB with the following stackup:
+- Power/Signal
+- GND
+- 3.3V
+- Signal
+
+We also switch from Rosserial to [I2C](/electronics/docs/communication/i2c.md) to send angles from Raspberry Pi to STM32.
+
+### Circuit Schematic and Layout
+
+### Problems
