@@ -1,0 +1,700 @@
+<?xml version="1.0" ?>
+<robot name="spiderbot_urdf_model_final" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find spiderbot_urdf_model_final_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find spiderbot_urdf_model_final_description)/urdf/spiderbot_urdf_model_final.trans" />
+<xacro:include filename="$(find spiderbot_urdf_model_final_description)/urdf/spiderbot_urdf_model_final.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="2.6809392293062096e-05 -4.643522955664628e-05 0.033799999999999816"/>
+    <mass value="3.423316766776228"/>
+    <inertia ixx="0.013718" ixy="-0.000137" ixz="8e-06" iyy="0.013876" iyz="5e-06" izz="0.022087"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-9.535726718429283e-05 0.0089554467100606 -0.01512831865838865"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.3e-05" ixy="-3e-06" ixz="6e-06" iyy="2.9e-05" iyz="1.1e-05" izz="1.4e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.133449 0.2402 0.093132"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.133449 0.2402 0.093132"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0054481249084034344 0.018378388735601603 -0.05539905539281395"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000242" ixy="-1.4e-05" ixz="3.8e-05" iyy="0.000226" iyz="6.6e-05" izz="3.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.153946 0.275642 -0.019668"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.153946 0.275642 -0.019668"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.04810589100224351 -0.0741378061694888 -0.0027082795290349244"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.000952" ixy="-0.000525" ixz="-4.4e-05" iyy="0.000346" iyz="-7.6e-05" izz="0.001232"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.064223 0.120238 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.064223 0.120238 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.003170256289144212 -0.005491189080670492 -0.0337999999999949"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="5.6e-05" ixy="-8e-06" ixz="0.0" iyy="4.7e-05" iyz="0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.053121 0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.053121 0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_2">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0014905093816917903 -0.004360052749155741 -0.016955511504603792"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.5e-05" ixy="-0.0" ixz="-1e-06" iyy="3.5e-05" iyz="0.0" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.240191 0.194817 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.240191 0.194817 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_2">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0077730568438748315 -0.00965074089206519 -0.05729636494851689"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000241" ixy="5e-06" ixz="3.6e-05" iyy="0.000247" iyz="-2.1e-05" izz="1.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.222054 0.184345 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.222054 0.184345 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_2">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0650704277368272 -0.04287078558611905 0.04178339207835309"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.000512" ixy="0.000429" ixz="-0.000408" iyy="0.001008" iyz="0.000236" izz="0.001011"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.081351 0.10311 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.081351 0.10311 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_2">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.005491222070922848 -0.0031702232988920914 -0.03379999999999489"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="4.7e-05" ixy="8e-06" ixz="-0.0" iyy="5.6e-05" iyz="0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.053121 0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.053121 0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0014909245702488527 -0.004360500927964625 -0.016955511504604077"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.5e-05" ixy="-0.0" ixz="-1e-06" iyy="3.5e-05" iyz="0.0" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.293312 0.102809 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.293312 0.102809 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0077726416553176025 -0.009650189070874032 -0.05729636494851709"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000241" ixy="5e-06" ixz="3.6e-05" iyy="0.000247" iyz="-2.1e-05" izz="1.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.275175 0.092338 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.275175 0.092338 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.06507001254826986 -0.04287023376492771 0.04178339207835281"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.000512" ixy="0.000429" ixz="-0.000408" iyy="0.001008" iyz="0.000236" izz="0.001011"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.134472 0.011103 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.134472 0.011103 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_3">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.005491806882365571 -0.0031706714777008215 -0.03379999999999489"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="4.7e-05" ixy="8e-06" ixz="-0.0" iyy="5.6e-05" iyz="0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.106241 -0.0 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.106241 -0.0 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_3.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_4">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.004360085739407937 -0.0014905423719440147 -0.016955511504604264"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.5e-05" ixy="0.0" ixz="-0.0" iyy="3.5e-05" iyz="-1e-06" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.15593 -0.279078 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.15593 -0.279078 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_4">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.009650773882317387 0.0077730238536225515 -0.05729636494851703"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000247" ixy="-5e-06" ixz="2.1e-05" iyy="0.000241" iyz="3.6e-05" izz="1.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.145458 -0.260941 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.145458 -0.260941 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_4">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.04287081857637112 0.06507039474657487 0.041783392078352966"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.001008" ixy="-0.000429" ixz="-0.000236" iyy="0.000512" iyz="-0.000408" izz="0.001011"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.064223 -0.120238 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.064223 -0.120238 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_4">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0031702562891442188 0.005491189080670492 -0.0337999999999949"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="5.6e-05" ixy="-8e-06" ixz="-0.0" iyy="4.7e-05" iyz="-0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.053121 -0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.053121 -0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_4.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_5">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0014905093816914294 0.004360052749155213 -0.016955511504603997"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.5e-05" ixy="-0.0" ixz="1e-06" iyy="3.5e-05" iyz="-0.0" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.240191 -0.194817 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.240191 -0.194817 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_5">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.007773056843875387 0.009650740892064524 -0.057296364948517"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000241" ixy="5e-06" ixz="-3.6e-05" iyy="0.000247" iyz="2.1e-05" izz="1.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.222054 -0.184345 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.222054 -0.184345 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_5">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.06507042773682764 0.04287078558611836 0.04178339207835291"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.000512" ixy="0.000429" ixz="0.000408" iyy="0.001008" iyz="-0.000236" izz="0.001011"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.081351 -0.10311 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.081351 -0.10311 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_5">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.005491222070923313 0.0031702232988915086 -0.03379999999999489"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="4.7e-05" ixy="8e-06" ixz="0.0" iyy="5.6e-05" iyz="-0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.053121 -0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.053121 -0.092008 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_5.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L3_6">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0014909245702490748 0.004360500927963612 -0.016955511504603997"/>
+    <mass value="0.08507758327600112"/>
+    <inertia ixx="3.5e-05" ixy="-0.0" ixz="1e-06" iyy="3.5e-05" iyz="-0.0" izz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.293312 -0.102809 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.293312 -0.102809 0.006875"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L3_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L2_6">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.007772641655317325 0.009650189070873005 -0.05729636494851696"/>
+    <mass value="0.10556026695885269"/>
+    <inertia ixx="0.000241" ixy="5e-06" ixz="-3.6e-05" iyy="0.000247" iyz="2.1e-05" izz="1.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.275175 -0.092338 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.275175 -0.092338 -0.111283"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L2_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="L1_6">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.06507001254826972 0.042870233764926755 0.041783392078352896"/>
+    <mass value="0.29510328391513424"/>
+    <inertia ixx="0.000512" ixy="0.000429" ixz="0.000408" iyy="0.001008" iyz="-0.000236" izz="0.001011"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.134472 -0.011103 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.134472 -0.011103 -0.0338"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/L1_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Hinge_6">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.005491806882365488 0.0031706714776999333 -0.03379999999999489"/>
+    <mass value="0.13570338096793705"/>
+    <inertia ixx="4.7e-05" ixy="8e-06" ixz="0.0" iyy="5.6e-05" iyz="-0.0" izz="2.3e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.106241 0.0 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.106241 0.0 -0.0676"/>
+    <geometry>
+      <mesh filename="package://spiderbot_urdf_model_final_description/meshes/Hinge_6.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev28" type="continuous">
+  <origin rpy="0 0 0" xyz="0.020497 0.035442 -0.1128"/>
+  <parent link="L2_1"/>
+  <child link="L3_1"/>
+  <axis xyz="-0.866025 0.5 -0.0"/>
+</joint>
+
+<joint name="Rev29" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.089723 -0.155404 -0.014132"/>
+  <parent link="L1_1"/>
+  <child link="L2_1"/>
+  <axis xyz="0.866025 -0.5 0.0"/>
+</joint>
+
+<joint name="Rev30" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.011102 -0.02823 -0.0338"/>
+  <parent link="Hinge_1"/>
+  <child link="L1_1"/>
+  <axis xyz="0.866025 -0.5 0.0"/>
+</joint>
+
+<joint name="Rev31" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.053121 -0.092008 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Rev32" type="continuous">
+  <origin rpy="0 0 0" xyz="0.018137 -0.010472 -0.118158"/>
+  <parent link="L2_2"/>
+  <child link="L3_2"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev33" type="continuous">
+  <origin rpy="0 0 0" xyz="0.140703 -0.081235 0.077483"/>
+  <parent link="L1_2"/>
+  <child link="L2_2"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev34" type="continuous">
+  <origin rpy="0 0 0" xyz="0.02823 -0.011102 -0.0338"/>
+  <parent link="Hinge_2"/>
+  <child link="L1_2"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev35" type="continuous">
+  <origin rpy="0 0 0" xyz="0.053121 -0.092008 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_2"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Rev36" type="continuous">
+  <origin rpy="0 0 0" xyz="0.018137 -0.010471 -0.118158"/>
+  <parent link="L2_3"/>
+  <child link="L3_3"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev37" type="continuous">
+  <origin rpy="0 0 0" xyz="0.140703 -0.081235 0.077483"/>
+  <parent link="L1_3"/>
+  <child link="L2_3"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev38" type="continuous">
+  <origin rpy="0 0 0" xyz="0.028231 -0.011103 -0.0338"/>
+  <parent link="Hinge_3"/>
+  <child link="L1_3"/>
+  <axis xyz="0.5 0.866025 0.0"/>
+</joint>
+
+<joint name="Rev39" type="continuous">
+  <origin rpy="0 0 0" xyz="0.106241 0.0 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_3"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Rev40" type="continuous">
+  <origin rpy="0 0 0" xyz="0.010472 0.018137 -0.118158"/>
+  <parent link="L2_4"/>
+  <child link="L3_4"/>
+  <axis xyz="-0.866025 0.5 0.0"/>
+</joint>
+
+<joint name="Rev41" type="continuous">
+  <origin rpy="0 0 0" xyz="0.081235 0.140703 0.077483"/>
+  <parent link="L1_4"/>
+  <child link="L2_4"/>
+  <axis xyz="-0.866025 0.5 0.0"/>
+</joint>
+
+<joint name="Rev42" type="continuous">
+  <origin rpy="0 0 0" xyz="0.011102 0.02823 -0.0338"/>
+  <parent link="Hinge_4"/>
+  <child link="L1_4"/>
+  <axis xyz="-0.866025 0.5 0.0"/>
+</joint>
+
+<joint name="Rev43" type="continuous">
+  <origin rpy="0 0 0" xyz="0.053121 0.092008 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_4"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Rev44" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.018137 0.010472 -0.118158"/>
+  <parent link="L2_5"/>
+  <child link="L3_5"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev45" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.140703 0.081235 0.077483"/>
+  <parent link="L1_5"/>
+  <child link="L2_5"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev46" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.02823 0.011102 -0.0338"/>
+  <parent link="Hinge_5"/>
+  <child link="L1_5"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev47" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.053121 0.092008 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_5"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Rev48" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.018137 0.010471 -0.118158"/>
+  <parent link="L2_6"/>
+  <child link="L3_6"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev49" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.140703 0.081235 0.077483"/>
+  <parent link="L1_6"/>
+  <child link="L2_6"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev50" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.028231 0.011103 -0.0338"/>
+  <parent link="Hinge_6"/>
+  <child link="L1_6"/>
+  <axis xyz="-0.5 -0.866025 0.0"/>
+</joint>
+
+<joint name="Rev51" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.106241 0.0 0.0676"/>
+  <parent link="base_link"/>
+  <child link="Hinge_6"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+</robot>
