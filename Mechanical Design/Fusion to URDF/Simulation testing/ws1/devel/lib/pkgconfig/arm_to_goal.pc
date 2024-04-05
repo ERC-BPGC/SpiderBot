@@ -1,8 +1,0 @@
-prefix=/home/jk/ROS/ws1/devel
-
-Name: arm_to_goal
-Description: Description of arm_to_goal
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

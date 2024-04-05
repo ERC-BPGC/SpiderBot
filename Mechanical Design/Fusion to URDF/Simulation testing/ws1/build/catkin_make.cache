@@ -1,2 +1,0 @@
-arm_to_goal
--DCATKIN_DEVEL_PREFIX=/home/jk/ROS/ws1/devel -DCMAKE_INSTALL_PREFIX=/home/jk/ROS/ws1/install -DCATKIN_WHITELIST_PACKAGES=arm_to_goal -G Unix Makefiles
