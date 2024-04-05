@@ -1,0 +1,8 @@
+prefix=/home/jk/ROS/ws1/install
+
+Name: mobile_manipulator_body
+Description: Description of mobile_manipulator_body
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

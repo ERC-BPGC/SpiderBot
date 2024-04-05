@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="urdf_bakchodi">
+  <link
+    name="link_1">
+    <inertial>
+      <origin
+        xyz="-1.6529055557047E-07 -4.05828624854812E-06 0.0750014985203898"
+        rpy="0 0 0" />
+      <mass
+        value="19.9950067969027" />
+      <inertia
+        ixx="0.334788848635103"
+        ixy="8.31458883562114E-09"
+        ixz="2.0443852111815E-08"
+        iyy="0.368256213908722"
+        iyz="1.87868476087456E-08"
+        izz="0.6375748872154" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link_2(1)">
+    <inertial>
+      <origin
+        xyz="-0.00810356313851382 2.67064148573581E-13 -0.214790803607845"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.00681160148226634"
+        ixy="8.67361737988404E-19"
+        ixz="-5.98005260761536E-18"
+        iyy="0.00681168214152217"
+        iyz="1.5811564026396E-17"
+        izz="0.000100637529407539" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(1).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(1).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_1"
+    type="continuous">
+    <origin
+      xyz="-0.41522 -0.23043 0.074128"
+      rpy="2.0035 0.10823 2.0944" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(1)" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="link_3(1)">
+    <inertial>
+      <origin
+        xyz="-0.0947261317748437 -0.190215442434137 0.00810286240868408"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00529685840188488"
+        ixy="-0.00258844740197998"
+        ixz="1.73472347597681E-18"
+        iyy="0.00138814032549684"
+        iyz="5.42101086242752E-18"
+        izz="0.00658581250827965" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(1).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(1).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_1"
+    type="continuous">
+    <origin
+      xyz="0 0 -0.43"
+      rpy="-1.5708 -1.1671 1.5708" />
+    <parent
+      link="link_2(1)" />
+    <child
+      link="link_3(1)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_2(2)">
+    <inertial>
+      <origin
+        xyz="-0.21083742886469 0.0410203352524196 0.0188772132838387"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.000345406956335757"
+        ixy="0.0012580725223286"
+        ixz="1.08151744761832E-15"
+        iyy="0.00656691271459396"
+        iyz="-2.10445486358926E-16"
+        izz="0.00681160148226635" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(2).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(2).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_2"
+    type="continuous">
+    <origin
+      xyz="0.018274 -0.47481 0.070255"
+      rpy="-1.2823 0.48453 1.7081" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(2)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3(2)">
+    <inertial>
+      <origin
+        xyz="-0.211143760806933 0.0239429917538433 -0.0188761379470315"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00018146250815652"
+        ixy="0.000726240456695398"
+        ixz="-2.03919578161879E-16"
+        iyy="0.0065035362192252"
+        iyz="2.32608774956858E-17"
+        izz="0.00658581250827966" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(2).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(2).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_2"
+    type="continuous">
+    <origin
+      xyz="-0.42209 0.082121 0"
+      rpy="-3.1416 0 -1.7494" />
+    <parent
+      link="link_2(2)" />
+    <child
+      link="link_3(2)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_2(3)">
+    <inertial>
+      <origin
+        xyz="0.155834156805056 0.147820177537882 0.0142552690889025"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.00327916668342931"
+        ixy="-0.00335085114121483"
+        ixz="1.70219741080224E-17"
+        iyy="0.0036331529875004"
+        iyz="1.6357900277375E-17"
+        izz="0.00681160148226634" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(3).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(3).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_3"
+    type="continuous">
+    <origin
+      xyz="0.4182 -0.22528 0.072296"
+      rpy="1.3639 0.38863 -0.60297" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(3)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3(3)">
+    <inertial>
+      <origin
+        xyz="0.0579003990729846 -0.204456592871259 0.0142543045889016"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00610428899257975"
+        ixy="0.00170061672599953"
+        ixz="-2.38524477946811E-18"
+        iyy="0.000580709734801973"
+        iyz="7.15573433840433E-18"
+        izz="0.00658581250827966" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(3).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(3).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_3"
+    type="continuous">
+    <origin
+      xyz="0.31197 0.29593 0"
+      rpy="0 0 0.44765" />
+    <parent
+      link="link_2(3)" />
+    <child
+      link="link_3(3)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_2(4)">
+    <inertial>
+      <origin
+        xyz="-0.0680759478787354 0.203717340044866 1.44121984343437E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.00613754826111445"
+        ixy="0.00201734629085851"
+        ixz="2.02528965820292E-16"
+        iyy="0.000774771409815259"
+        iyz="-6.05174547627096E-16"
+        izz="0.00681160148226634" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(4).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(4).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_4"
+    type="continuous">
+    <origin
+      xyz="0.4112 0.23739 0.075003"
+      rpy="1.5705 -0.72682 -2.6178" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(4)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3(4)">
+    <inertial>
+      <origin
+        xyz="0.209311813366109 0.0366540498044644 -1.75753837648451E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00029211390319112"
+        ixy="-0.0011021468801205"
+        ixz="-2.44867060655851E-16"
+        iyy="0.00639288482419059"
+        iyz="-4.27175655959289E-17"
+        izz="0.00658581250827965" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(4).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(4).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_4"
+    type="continuous">
+    <origin
+      xyz="-0.13628 0.40783 0"
+      rpy="3.1416 0 -2.3724" />
+    <parent
+      link="link_2(4)" />
+    <child
+      link="link_3(4)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_2(5)">
+    <inertial>
+      <origin
+        xyz="-0.16062877292981 -0.142595535068648 0.00503523317546434"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.00305844985544591"
+        ixy="-0.00333186985313675"
+        ixz="-1.71195146431958E-16"
+        iyy="0.00385386981548379"
+        iyz="-1.52085376545478E-16"
+        izz="0.00681160148226633" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(5).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(5).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_5"
+    type="continuous">
+    <origin
+      xyz="-0.0050333 0.47481 0.074656"
+      rpy="-1.4987 -0.36728 -1.5967" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(5)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3(5)">
+    <inertial>
+      <origin
+        xyz="-0.0475222750500123 -0.207114914853979 -0.00503782034930849"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00626146152632296"
+        ixy="-0.00141394451663058"
+        ixz="-1.06424125755829E-19"
+        iyy="0.000423537201058755"
+        iyz="-5.2188607376729E-19"
+        izz="0.00658581250827966" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(5).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(5).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_5"
+    type="continuous">
+    <origin
+      xyz="-0.32157 -0.28547 0"
+      rpy="-3.1416 0 0.53485" />
+    <parent
+      link="link_2(5)" />
+    <child
+      link="link_3(5)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_2(6)">
+    <inertial>
+      <origin
+        xyz="-0.21139741682832 0.0380292186715435 -0.00901168359242732"
+        rpy="0 0 0" />
+      <mass
+        value="0.504491865664404" />
+      <inertia
+        ixx="0.000311012256476399"
+        ixy="0.00116943433027736"
+        ixz="-4.55012546737854E-16"
+        iyy="0.00660130741445331"
+        iyz="8.13151629364128E-17"
+        izz="0.00681160148226634" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(6).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_2(6).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j1_6"
+    type="continuous">
+    <origin
+      xyz="-0.41567 0.22965 0.073922"
+      rpy="1.694 0.2113 -0.49763" />
+    <parent
+      link="link_1" />
+    <child
+      link="link_2(6)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="link_3(6)">
+    <inertial>
+      <origin
+        xyz="-0.0966239748784632 -0.189258453074142 -0.0090122701394556"
+        rpy="0 0 0" />
+      <mass
+        value="0.498815935879898" />
+      <inertia
+        ixx="0.00524468936915548"
+        ixy="-0.00262702348411622"
+        ixz="-1.73472347597681E-18"
+        iyy="0.00144030935822624"
+        iyz="-4.89246230334084E-18"
+        izz="0.00658581250827966" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(6).STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://urdf_bakchodi/meshes/link_3(6).STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="j2_6"
+    type="continuous">
+    <origin
+      xyz="-0.42321 0.076133 0"
+      rpy="0 0 0.33893" />
+    <parent
+      link="link_2(6)" />
+    <child
+      link="link_3(6)" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+</robot>
