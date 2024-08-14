@@ -84,7 +84,7 @@ During the semester break, our task was to design a [PCB](/electronics/docs/pcb)
 - The wired connections are unreliable.
 - The motors don't seem to be getting enough power.
 
-## Version 2.0
+## Version 2.x (On Hold)
 
 All the wiring is done between battery and the buck converter. So if we eliminate the buck converter from the circuit then we can eliminate all the wiring we have.
 
@@ -103,3 +103,17 @@ We also switch from Rosserial to [I2C](/electronics/docs/communication/i2c.md) t
 ### Circuit Schematic and Layout
 
 ### Problems
+
+- Problem with I2C communication on STM32
+- Purpose of implementing distributed control
+
+## Version 2.0
+
+The circuit remains the same as Version 1. Using Jetson Nano instead of Raspberry Pi and upgrade to ROS2. Rosserial
+is not supported on ROS2, so we are implementing UART to communicate with the Arduinos.
+
+We have done torque testing of the RKi-120x servos and they don't seem to giving the rated torque. We will also do
+some power testing once we get the current sensor module.
+
+While implementing communication, we will also need to determine the publishing rate of the angles generated from
+CPG and also the interval at which serial communication has to take place. We also need to consider the time taken by motors to reach position. The RKi-120x servos don't provide feedback so we will have to use speed to determine the time they need to reach the desired position.
