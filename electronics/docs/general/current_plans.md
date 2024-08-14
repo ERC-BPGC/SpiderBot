@@ -1,8 +1,9 @@
 # Current Plans
 
-* Interface Raspberry Pi and STM32 using I2C
-* Interface Jetson Nano and STM32 using I2C
-* Onboard charging and battery management
-* Power management
-* New Digital Servo motors
-* Sensor Interfacing
+- [ ] Interface Jetson Nano and Arduino using UART
+- [ ] Battery Management
+- [ ] Power management
+- [ ] New Digital Servo motors
+- [ ] IMU Interfacing with STM32
+- [ ] Display Interfacing with STM32
+- [ ] New Electronic Design
