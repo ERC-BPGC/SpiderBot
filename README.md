@@ -161,45 +161,16 @@ In our workspace directory it is present in
 
 ## **Running the code**
 
-Run the given line to launch the Arduino
+Run the given lines to start the spiderbot
 
 ```bash 
-roslaunch arduino.launch
+roslaunch spiderbot arduino.launch
 ```
 
-## **Running the cpg code**
-
-```catkin_ws/src/cpg_test/src``` contains the code files
-
-cpg_j1 and cpg_j2 are the publishers
-
-To run these files use code given below
-```bash
-rosrun cpg_test cpg_j1.py
+```bash 
+roslaunch automation automation.launch
 ```
 
-```bash
-rosrun cpg_test cpg_j2.py
-```
-
-cpg_sub is the subscriber.To run the file use the code given below
-```bash
-rosrun cpg_test cpg_sub.py
-```
-
-The cpg_j1_twist and cpg_j2_twist is for the testing the twisting motion
-
-## **Running the joystick code**
-
-```catkin_ws/src/controller/src```
-
-fileread_joy contains the code.The remaining text files contain
-hardcoded angles required for different kinds of movements
-
-To Run it
-```bash
-rosrun controller fileread_joy.py
-```
 
 ## **Future goals**
 
