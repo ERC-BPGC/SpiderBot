@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="automation" type="walking_controller.py" name="walking_controller">
+  </node>
+  <node pkg="joy" type="joy_node" name="joy_node">
+  </node>
+  <node pkg="automation" type="joyread.py" name="controller">
+  </node>
+</launch>
+
+
