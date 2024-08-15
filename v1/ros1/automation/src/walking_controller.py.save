@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""
+The node publishes joint position commands to effort position controllers.
+The controllers should already be spawned and running and communicating
+with the appropriate robot hardware interface.
+"""
+
+import rospy
+from std_msgs.msg import Float32MultiArray
+from cpg import CPG
+import numpy as np
+
+
+
+
+class JointCmds:
+    """
+    The class provides a dictionary mapping joints to command values.
+    """
+
+
+
+    def __init__( self ) :
+        self.sub = rospy.Subscriber("/controller",Float32MultiArray,self.state)
+        self.n = 0
+        self.amp_off =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+        self.joints_list = []
+        for i in range(6) :
+            for j in range(3) :
+                leg_str='L' + str(i+1) + '_' + str(j+1)
+                self.joints_list += [leg_str]
+
+        self.cpg_joints = ['L1_2','L2_2','L3_2','L4_2','L5_2','L6_2']
+        self.group_joints = [['L1_1', 'L4_1'], ['L6_1', 'L3_1'], ['L2_1', 'L5_1']]
+        self.group_joints_flat = [item for sublist in self.group_joints \
+                                  for item in sublist]
+        
+        self.cpg = CPG()
+        self.jnt_cmd_dict = {}
+    
+    def state(self,msg):
+        """[Amp L1j1, amp l2j1, amp l3j1, amp l4j1, ampl5 j1, amp l6j1, offset l1j1, off l1j2, off l2j1, off l2j2, off l3j1, off l3j1, ...... , index n]"""
+        default = (0,0,0,0,0,0,90,90,90,90,90,90,90,90,90,90,90,90,0,0)
+
+        if (msg.data != default):
+            self.n = 1
+            self.amp_off = msg.data
+        else:
+            'STANDING CASE'
+            self.amp_off = default
+            self.n=0
+    def update( self, dt ):
+        s = self.cpg.simulate(dt)
+        x = s[:6]
+        y = s[6:]
+
+        for i, jnt in enumerate(self.cpg_joints) :
+            self.jnt_cmd_dict[jnt] = max(25*y[i],0)*self.amp_off[19]
+            # print(self.jnt_cmd_dict[jnt])
+        # print(self.amp_off[0])
+        self.jnt_cmd_dict['L1_1'] = 0
+        self.jnt_cmd_dict['L2_1'] = 0
+        self.jnt_cmd_dict['L3_1'] = 0
+        self.jnt_cmd_dict['L4_1'] = 0
+        self.jnt_cmd_dict['L5_1'] = 0
+        self.jnt_cmd_dict['L6_1'] = 0
+        self.jnt_cmd_dict['L5_3'] = 0
+        self.jnt_cmd_dict['L1_1'] += \
+           self.amp_off[0]*(np.cos(np.arctan2(y[0],x[0])+np.pi)+1)
+        self.jnt_cmd_dict['L2_1'] -= \
+            self.amp_off[1]*(np.cos(np.arctan2(y[1],x[1])+np.pi)+1)
+        self.jnt_cmd_dict['L3_1'] += \
+            self.amp_off[2]*(np.cos(np.arctan2(y[2],x[2])+np.pi)+1)
+        self.jnt_cmd_dict['L4_1'] -= \
+            self.amp_off[3]*(np.cos(np.arctan2(y[3],x[3])+np.pi)+1)
+        self.jnt_cmd_dict['L5_1'] += \
+            self.amp_off[4]*(np.cos(np.arctan2(y[4],x[4])+np.pi)+1)
+        self.jnt_cmd_dict['L6_1'] -= \
+            self.amp_off[5]*(np.cos(np.arctan2(y[5],x[5])+np.pi)+1)
+        # for jnt in self.group_joints[2] :
+        #     self.jnt_cmd_dict[jnt] = 1.57
+        # for jnt in self.group_joints[3] :
+        #     self.jnt_cmd_dict[jnt] = -1.57
+
+        for jnt in self.joints_list :
+            if jnt not in self.cpg_joints and \
+               jnt not in self.group_joints_flat :
+                self.jnt_cmd_dict[jnt] = 0.0
+
+        return self.jnt_cmd_dict
+
+class AnglePublisher:
+    def __init__(self):
+        self.pub1 = rospy.Publisher("leg123",Float32MultiArray,queue_size=1)
+        self.pub2 = rospy.Publisher("leg456", Float32MultiArray,queue_size=1)
+        
+        rospy.init_node('walking_controller', anonymous=True)
+        self.jntcmds = JointCmds()
+        # self.n = 0
+
+    
+    def publish_commands( self, hz ):
+        while not rospy.is_shutdown():
+            rate = rospy.Rate(hz)
+            jnt_cmd_dict = self.jntcmds.update(1./hz)
+            msg1 = Float32MultiArray()
+            msg2 = Float32MultiArray()
+
+            # self.j=[self.l1j1,self.l1j2,self.l1j3,self.l2j1,self.l2j2,self.l2j3,self.l3j1,self.l3j2,self.l3j3]
+            degree_factor = 180 / np.pi
+            angles1 = [jnt_cmd_dict["L1_1"], jnt_cmd_dict["L1_2"], jnt_cmd_dict["L1_3"], jnt_cmd_dict["L2_1"], jnt_cmd_dict["L2_2"], jnt_cmd_dict["L2_3"], jnt_cmd_dict["L3_1"], jnt_cmd_dict["L3_2"], jnt_cmd_dict["L3_3"]]
+
+            #self.j2=[self.l4j1,self.l4j2,self.l4j3,self.l5j1,self.l5j2,self.l5j3,self.l6j1,self.l6j2,self.l6j3]
+            angles2 = [jnt_cmd_dict["L4_1"], jnt_cmd_dict["L4_2"], jnt_cmd_dict["L4_3"], jnt_cmd_dict["L5_1"], jnt_cmd_dict["L5_2"], jnt_cmd_dict["L5_3"], jnt_cmd_dict["L6_1"], jnt_cmd_dict["L6_2"], jnt_cmd_dict["L6_3"]]
+
+
+            angles1[0] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[6]
+            angles1[1] += (90 * self.jntcmds.n) 
+            angles1[2] = 145
+            angles1[3] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[8]
+            angles1[4] += (90 * self.jntcmds.n) 
+            angles1[5] = 145
+            angles1[6] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[10]
+            angles1[7] += (90 * self.jntcmds.n) 
+            angles1[8] = 145
+
+            angles2[0] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[12]
+            angles2[1] += (70 * self.jntcmds.n) + self.jntcmds.amp_off[13]
+            angles2[2] = 145
+            angles2[3] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[14]
+            angles2[4] += (70 * self.jntcmds.n) + self.jntcmds.amp_off[15]
+            angles2[5] = 145
+            angles2[6] += (90 * self.jntcmds.n) + self.jntcmds.amp_off[16]
+            angles2[7] += (70 * self.jntcmds.n) + self.jntcmds.amp_off[17]
+            angles2[8] = 145
+
+            msg1.data = angles1
+            msg2.data = angles2
+            self.pub1.publish(msg1)
+            self.pub2.publish(msg2)
+            print(self.jntcmds.amp_off[18])
+            rate.sleep()
+
+
+if __name__ == "__main__":
+    try:
+        hz = 20
+        angle_publisher = AnglePublisher()
+        angle_publisher.publish_commands( hz )
+        cpg = CPG()
+        dt=1./hz
+        # cpg.plot(10,dt)
+    except rospy.ROSInterruptException:
+        pass
+
+                                   
