@@ -37,7 +37,7 @@ class CPG_Node(Node):
                 
         for i in range(6):
             self.joint_angles[3*i] = 0
-            if (i % 2):
+            if (i % 2 == 0):
                 self.joint_angles[3*i] += self.amp_offset[i] * (np.cos(np.arctan2(upper[i], lower[i]) + np.pi) + 1)
             else:
                 self.joint_angles[3*i] -= self.amp_offset[i] * (np.cos(np.arctan2(upper[i], lower[i]) + np.pi) + 1)
