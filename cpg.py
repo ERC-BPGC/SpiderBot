@@ -40,7 +40,7 @@ class CPG:
         ds = deepcopy(s)
         
         for i in range(self.n):
-            self.omega[i] = self.omega_st / np.exp(-self.b * s[self.n+i] + 1) + self.omega_sw / np.exp(self.b * s[self.n+i] + 1)
+            self.omega[i] = self.omega_st / (np.exp(-self.b * s[self.n+i]) + 1) + self.omega_sw / (np.exp(self.b * s[self.n+i]) + 1)
             self.r[i] = np.sqrt(s[i]**2 + s[self.n + i]**2)
             
             ds[i] = self.alpha * (self.mu - self.r[i]**2) * s[i] - self.omega[i] * s[self.n+i]
