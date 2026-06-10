@@ -187,7 +187,10 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   cfg.rewards["track_linear_velocity"].weight = 7.5
   cfg.rewards["track_linear_velocity"].params["std"] = 0.1**0.5
   cfg.rewards["track_angular_velocity"].params["std"] = 0.50**0.5
-  cfg.rewards["action_rate_l2"].weight = -0.25
+  # This reward is computed on raw policy actions, not the scaled/clipped joint
+  # targets. Keep it moderate so a brief exploration spike cannot dominate the
+  # return and destabilize PPO.
+  cfg.rewards["action_rate_l2"].weight = -0.1
   cfg.rewards["air_time"].weight = 1.0
   cfg.rewards["air_time"].params["threshold_min"] = 0.25
   cfg.rewards["air_time"].params["threshold_max"] = 0.75
@@ -205,6 +208,12 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
     },
     {
       "step": 1500 * 24,
+      "lin_vel_x": (-0.18, 0.18),
+      "lin_vel_y": (-0.18, 0.18),
+      "ang_vel_z": (-0.5, 0.5),
+    },
+    {
+      "step": 2500 * 24,
       "lin_vel_x": (-0.25, 0.25),
       "lin_vel_y": (-0.25, 0.25),
       "ang_vel_z": (-0.55, 0.55),
