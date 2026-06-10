@@ -7,6 +7,7 @@ Modified to track:
 2. Mean and std of all last link positions
 """
 
+import argparse
 import mujoco
 from mujoco import viewer
 import numpy as np
@@ -15,6 +16,12 @@ import onnxruntime as ort
 from collections import deque
 import pickle
 import os
+
+from history_obs import (
+    ObservationHistory,
+    build_actor_observation,
+    process_policy_action,
+)
 
 # ============================================================================
 # Configuration
@@ -25,6 +32,8 @@ ONNX_MODEL_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjl
 
 CONTROL_FREQ = 50  # Hz (policy runs at 50 Hz)
 ACTION_SCALE = 0.5  # Scale applied to policy outputs
+RAW_ACTION_CLIP = 2.0
+DEFAULT_HISTORY_LENGTH = 3
 
 # Output file paths
 OUTPUT_DIR = "/home/marmot/claude/locomotion_data"
@@ -346,7 +355,20 @@ class DataTracker:
 # Main Inference Loop
 # ============================================================================
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Collect Spiderbot sim2sim rollout data.")
+    parser.add_argument(
+        "--history-length",
+        type=int,
+        default=DEFAULT_HISTORY_LENGTH,
+        help="Number of actor observation frames for non-command terms. Use 1 for old single-frame policies.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+
     # Load MuJoCo model
     print(f"Loading MuJoCo model from {XML_PATH}...")
     model = mujoco.MjModel.from_xml_path(XML_PATH)
@@ -355,6 +377,9 @@ def main():
     # Load ONNX model
     print(f"Loading ONNX model from {ONNX_MODEL_PATH}...")
     ort_session = ort.InferenceSession(ONNX_MODEL_PATH)
+    input_shape = ort_session.get_inputs()[0].shape
+    print(f"ONNX input shape: {input_shape}")
+    print(f"Observation history length: {args.history_length}")
     
     # Get joint and actuator indices
     qpos_indices, qvel_indices = get_joint_indices(model, ACTUATED_JOINT_NAMES)
@@ -373,6 +398,7 @@ def main():
     
     # Action history
     last_action = np.zeros(len(ACTUATED_JOINT_NAMES), dtype=np.float32)
+    obs_history = ObservationHistory(args.history_length)
     
     # Control timing
     dt_control = 1.0 / CONTROL_FREQ
@@ -422,14 +448,15 @@ def main():
                     actions_obs = last_action.copy()
                     command = cmd_interface.get_command()
                     
-                    observation = np.concatenate([
+                    observation = build_actor_observation(
+                        obs_history,
                         base_ang_vel,
                         projected_gravity,
                         joint_pos,
                         joint_vel,
                         actions_obs,
                         command,
-                    ]).astype(np.float32)
+                    )
                     
                     # ================================================================
                     # 2. Run Policy Inference
@@ -438,11 +465,13 @@ def main():
                     obs_batch = observation.reshape(1, -1)
                     ort_inputs = {ort_session.get_inputs()[0].name: obs_batch}
                     ort_outputs = ort_session.run(None, ort_inputs)
-                    action = ort_outputs[0][0]
-                    
-                    action = action * ACTION_SCALE
-                    action = np.clip(action, -1.0, 1.0)
-                    last_action = action.copy()
+                    raw_action = ort_outputs[0][0]
+                    last_action, action = process_policy_action(
+                        raw_action,
+                        ACTION_SCALE,
+                        raw_clip=RAW_ACTION_CLIP,
+                        processed_clip=None,
+                    )
                     
                     # ================================================================
                     # 3. Apply Actions

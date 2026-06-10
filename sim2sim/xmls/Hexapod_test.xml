@@ -56,7 +56,7 @@
   </asset>
 
   <worldbody>
-    <body name="base_link" pos="0.0 0 0.15" quat="1 0 0 0" childclass="spider">\
+    <body name="base_link" pos="0.0 0 0.125" quat="1 0 0 0" childclass="spider">\
     
     <inertial pos="0 0 0" mass="1.75" diaginertia="0.1 0.1 0.1" />
     <joint type="free" />

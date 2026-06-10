@@ -17,10 +17,7 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
       distribution_cfg={
         "class_name": "GaussianDistribution",
         "init_std": 1.0,
-        # Keep the learned exploration scale positive by construction. With the
-        # scalar parameterization, an unstable PPO update can push the underlying
-        # std parameter negative even though forwards clamp it.
-        "std_type": "log",
+        "std_type": "scalar",
       },
     ),
     critic=RslRlModelCfg(
@@ -47,10 +44,6 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
     logger="wandb",
     wandb_project="spiderbot_mjlab",
     wandb_tags=(),
-    # Bound raw policy outputs before they enter the env. Spiderbot action terms
-    # also clip processed joint targets, but raw-action rewards such as
-    # action_rate_l2 operate before that processing.
-    clip_actions=2.0,
     save_interval=100,
     num_steps_per_env=24,
     max_iterations=10_000,

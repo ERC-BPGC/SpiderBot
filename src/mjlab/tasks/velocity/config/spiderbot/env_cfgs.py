@@ -27,16 +27,16 @@ TerrainType = Literal["rough", "obstacles"]
 
 ACTUATED_JOINT_NAMES = (
   "calf_motor_link_joint_leg_1",
-  "calf_motor_link_joint_leg_2",
-  "calf_motor_link_joint_leg_3",
-  "calf_motor_link_joint_leg_4",
-  "calf_motor_link_joint_leg_5",
-  "calf_motor_link_joint_leg_6",
   "parallel_link_top_joint_leg_1",
+  "calf_motor_link_joint_leg_2",
   "parallel_link_top_joint_leg_2",
+  "calf_motor_link_joint_leg_3",
   "parallel_link_top_joint_leg_3",
+  "calf_motor_link_joint_leg_4",
   "parallel_link_top_joint_leg_4",
+  "calf_motor_link_joint_leg_5",
   "parallel_link_top_joint_leg_5",
+  "calf_motor_link_joint_leg_6",
   "parallel_link_top_joint_leg_6",
 )
 FOOT_NAMES = ("foot_1", "foot_2", "foot_3", "foot_4", "foot_5", "foot_6")
@@ -76,7 +76,9 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   actor_terms.pop("height_scan", None)
 
   actor_terms["joint_pos"].params = {
-    "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
+    "asset_cfg": SceneEntityCfg(
+      "robot", joint_names=ACTUATED_JOINT_NAMES, preserve_order=True
+    ),
   }
   actor_terms["joint_pos"].noise = Unoise(n_min=-0.025, n_max=0.025)
   actor_terms["joint_pos"].clip = (-5.0, 5.0)
@@ -84,7 +86,9 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   actor_terms["joint_pos"].delay_max_lag = 6
   actor_terms["joint_pos"].history_length = 3
   actor_terms["joint_vel"].params = {
-    "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
+    "asset_cfg": SceneEntityCfg(
+      "robot", joint_names=ACTUATED_JOINT_NAMES, preserve_order=True
+    ),
   }
   actor_terms["joint_vel"].scale = 0.05
   actor_terms["joint_vel"].clip = (-5.0, 5.0)
@@ -110,12 +114,16 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   critic_terms["projected_gravity"].clip = (-1.5, 1.5)
   critic_terms["projected_gravity"].history_length = 3
   critic_terms["joint_pos"].params = {
-    "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
+    "asset_cfg": SceneEntityCfg(
+      "robot", joint_names=ACTUATED_JOINT_NAMES, preserve_order=True
+    ),
   }
   critic_terms["joint_pos"].clip = (-5.0, 5.0)
   critic_terms["joint_pos"].history_length = 3
   critic_terms["joint_vel"].params = {
-    "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
+    "asset_cfg": SceneEntityCfg(
+      "robot", joint_names=ACTUATED_JOINT_NAMES, preserve_order=True
+    ),
   }
   critic_terms["joint_vel"].scale = 0.05
   critic_terms["joint_vel"].clip = (-5.0, 5.0)

@@ -3,11 +3,18 @@ Sim2Sim inference script for Hexapod policy with CoT calculation.
 Runs robot still for N steps, then commands forward velocity, then stops and reports CoT.
 """
 
+import argparse
 import mujoco
 from mujoco import viewer
 import numpy as np
 import time
 import onnxruntime as ort
+
+from history_obs import (
+    ObservationHistory,
+    build_actor_observation,
+    process_policy_action,
+)
 
 # ============================================================================
 # Configuration
@@ -17,7 +24,9 @@ XML_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/
 ONNX_MODEL_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/sim2sim/policies/t2.onnx"
 
 CONTROL_FREQ = 50       # Hz
-ACTION_SCALE = 0.5
+ACTION_SCALE = 0.25
+RAW_ACTION_CLIP = 2.0
+DEFAULT_HISTORY_LENGTH = 3
 
 ROBOT_MASS_KG = 3.0     # kg — update if different
 COMMAND_VEL_X = 0.0     # m/s forward command during locomotion phase
@@ -27,6 +36,8 @@ STILL_STEPS       = 100   # 2 s standing still
 LOCOMOTION_STEPS  = 500   # 10 s walking
 # Script exits after STILL_STEPS + LOCOMOTION_STEPS
 
+# Actuated joint names in the same natural order used by MJLab action targets:
+# calf, parallel-top for each leg.
 ACTUATED_JOINT_NAMES = [
     "calf_motor_link_joint_leg_1", "parallel_link_top_joint_leg_1",
     "calf_motor_link_joint_leg_2", "parallel_link_top_joint_leg_2",
@@ -35,6 +46,10 @@ ACTUATED_JOINT_NAMES = [
     "calf_motor_link_joint_leg_5", "parallel_link_top_joint_leg_5",
     "calf_motor_link_joint_leg_6", "parallel_link_top_joint_leg_6",
 ]
+PROCESSED_ACTION_CLIP = (
+    np.array([-0.65, -0.35] * 6, dtype=np.float32),
+    np.array([0.65, 0.55] * 6, dtype=np.float32),
+)
 
 # ============================================================================
 # Helper Functions
@@ -99,13 +114,29 @@ def compute_instantaneous_power(data, qvel_indices, actuator_indices):
 # Main
 # ============================================================================
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run Spiderbot sim2sim CoT test.")
+    parser.add_argument(
+        "--history-length",
+        type=int,
+        default=DEFAULT_HISTORY_LENGTH,
+        help="Number of actor observation frames for non-command terms. Use 1 for old single-frame policies.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+
     print(f"Loading MuJoCo model from {XML_PATH}...")
     model = mujoco.MjModel.from_xml_path(XML_PATH)
     data = mujoco.MjData(model)
 
     print(f"Loading ONNX model from {ONNX_MODEL_PATH}...")
     ort_session = ort.InferenceSession(ONNX_MODEL_PATH)
+    input_shape = ort_session.get_inputs()[0].shape
+    print(f"ONNX input shape: {input_shape}")
+    print(f"Observation history length: {args.history_length}")
 
     qpos_indices, qvel_indices = get_joint_indices(model, ACTUATED_JOINT_NAMES)
     actuator_indices = get_actuator_indices(model, ACTUATED_JOINT_NAMES)
@@ -119,6 +150,7 @@ def main():
     n_sim_steps = int(dt_control / dt_sim)
 
     last_action = np.zeros(len(ACTUATED_JOINT_NAMES), dtype=np.float32)
+    obs_history = ObservationHistory(args.history_length)
 
     # ── CoT tracking (locomotion phase only) ──────────────────────────────
     loco_energy_J   = 0.0   # accumulated mechanical energy during locomotion
@@ -161,20 +193,25 @@ def main():
                 joint_pos         = data.qpos[qpos_indices] - default_joint_pos
                 joint_vel         = data.qvel[qvel_indices] * 0.05
 
-                observation = np.concatenate([
+                observation = build_actor_observation(
+                    obs_history,
                     base_ang_vel,
                     projected_gravity,
                     joint_pos,
                     joint_vel,
                     last_action,
                     command,
-                ]).astype(np.float32)
+                )
 
                 # ── Policy inference ──────────────────────────────────────
                 ort_inputs  = {ort_session.get_inputs()[0].name: observation.reshape(1, -1)}
-                action      = ort_session.run(None, ort_inputs)[0][0]
-                action      = np.clip(action * ACTION_SCALE, -1.0, 1.0)
-                last_action = action.copy()
+                raw_action = ort_session.run(None, ort_inputs)[0][0]
+                last_action, action = process_policy_action(
+                    raw_action,
+                    ACTION_SCALE,
+                    raw_clip=RAW_ACTION_CLIP,
+                    processed_clip=PROCESSED_ACTION_CLIP,
+                )
 
                 # ── Apply actions ─────────────────────────────────────────
                 data.ctrl[actuator_indices] = default_joint_pos + action

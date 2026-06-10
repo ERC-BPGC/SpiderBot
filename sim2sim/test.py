@@ -3,6 +3,7 @@ Sim2Sim inference script for Hexapod policy.
 Loads an ONNX model and runs it in pure MuJoCo.
 """
 
+import argparse
 import mujoco
 from mujoco import viewer
 import numpy as np
@@ -10,18 +11,26 @@ import time
 import onnxruntime as ort
 from collections import deque
 
+from history_obs import (
+    ObservationHistory,
+    build_actor_observation,
+    process_policy_action,
+)
+
 # ============================================================================
 # Configuration
 # ============================================================================
 
-XML_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/sim2sim/xmls/flat_terrain.xml"
-ONNX_MODEL_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/sim2sim/policies/t2.onnx"  # Path to your exported ONNX model
+XML_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/sim2sim/xmls/flat_terrain.xml"
+ONNX_MODEL_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/logs/rsl_rl/spiderbot_velocity/2026-06-10_23-59-58/2026-06-10_23-59-58.onnx"  # Path to your exported ONNX model
 
 CONTROL_FREQ = 50  # Hz (policy runs at 50 Hz)
-ACTION_SCALE = 0.5  # Scale applied to policy outputs
+ACTION_SCALE = 0.25  # Spiderbot action scale from MJLab env config.
+RAW_ACTION_CLIP = 2.0
+DEFAULT_HISTORY_LENGTH = 3
 
-# Actuated joint names (12 joints - interleaved by leg)
-# Each leg has: calf_motor, then parallel_top
+# Actuated joint names in the same natural order used by MJLab action targets:
+# calf, parallel-top for each leg.
 ACTUATED_JOINT_NAMES = [
     "calf_motor_link_joint_leg_1", "parallel_link_top_joint_leg_1",
     "calf_motor_link_joint_leg_2", "parallel_link_top_joint_leg_2",
@@ -30,6 +39,10 @@ ACTUATED_JOINT_NAMES = [
     "calf_motor_link_joint_leg_5", "parallel_link_top_joint_leg_5",
     "calf_motor_link_joint_leg_6", "parallel_link_top_joint_leg_6",
 ]
+PROCESSED_ACTION_CLIP = (
+    np.array([-0.65, -0.35] * 6, dtype=np.float32),
+    np.array([0.65, 0.55] * 6, dtype=np.float32),
+)
 
 # Command limits (for keyboard control)
 MAX_LIN_VEL_X = 0.5  # m/s
@@ -170,7 +183,20 @@ class KeyboardCommandInterface:
 # Main Inference Loop
 # ============================================================================
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run Spiderbot sim2sim policy playback.")
+    parser.add_argument(
+        "--history-length",
+        type=int,
+        default=DEFAULT_HISTORY_LENGTH,
+        help="Number of actor observation frames for non-command terms. Use 1 for old single-frame policies.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = parse_args()
+
     # Load MuJoCo model
     print(f"Loading MuJoCo model from {XML_PATH}...")
     model = mujoco.MjModel.from_xml_path(XML_PATH)
@@ -179,6 +205,9 @@ def main():
     # Load ONNX model
     print(f"Loading ONNX model from {ONNX_MODEL_PATH}...")
     ort_session = ort.InferenceSession(ONNX_MODEL_PATH)
+    input_shape = ort_session.get_inputs()[0].shape
+    print(f"ONNX input shape: {input_shape}")
+    print(f"Observation history length: {args.history_length}")
     
     # Get joint and actuator indices
     qpos_indices, qvel_indices = get_joint_indices(model, ACTUATED_JOINT_NAMES)
@@ -203,6 +232,7 @@ def main():
     
     # Action history (for observation)
     last_action = np.zeros(len(ACTUATED_JOINT_NAMES), dtype=np.float32)
+    obs_history = ObservationHistory(args.history_length)
     
     # Control timing
     dt_control = 1.0 / CONTROL_FREQ
@@ -263,8 +293,8 @@ def main():
                     print(f"\n{'='*60}")
                     print(f"ACTIVATING FORWARD COMMAND at step {step_count}")
                     print(f"{'='*60}\n")
-                    cmd_interface.lin_vel_x = 0.35  # Move forward
-                    # cmd_interface.ang_vel_z = 0.35  # Uncomment to test turning
+                    cmd_interface.lin_vel_x = 0.5  # Move forward
+                    # cmd_interface.ang_vel_z = 0.25  # Uncomment to test turning
                 
                 # You can also add step-based command changes:
                 # if step_count == 300:
@@ -293,16 +323,18 @@ def main():
                 # Command (from manual setting above)
                 command = cmd_interface.get_command()
                 
-                # Concatenate observation
-                # Order: base_ang_vel(3) + projected_gravity(3) + joint_pos(12) + joint_vel(12) + actions(12) + command(3)
-                observation = np.concatenate([
+                # Order:
+                # base_ang_vel history + projected_gravity history + joint_pos history
+                # + joint_vel history + actions history + single-frame command.
+                observation = build_actor_observation(
+                    obs_history,
                     base_ang_vel,
                     projected_gravity,
                     joint_pos,
                     joint_vel,
                     actions_obs,
                     command,
-                ]).astype(np.float32)
+                )
                 
                 # ================================================================
                 # 2. Run Policy Inference
@@ -314,16 +346,13 @@ def main():
                 # Run inference
                 ort_inputs = {ort_session.get_inputs()[0].name: obs_batch}
                 ort_outputs = ort_session.run(None, ort_inputs)
-                action = ort_outputs[0][0]  # Remove batch dimension
-                
-                # Apply action scale
-                action = action * ACTION_SCALE
-                
-                # Clip action to [-1, 1] (safety)
-                action = np.clip(action, -1.0, 1.0)
-                
-                # Store for next observation
-                last_action = action.copy()
+                raw_action = ort_outputs[0][0]  # Remove batch dimension
+                last_action, action = process_policy_action(
+                    raw_action,
+                    ACTION_SCALE,
+                    raw_clip=RAW_ACTION_CLIP,
+                    processed_clip=PROCESSED_ACTION_CLIP,
+                )
                 
                 # ================================================================
                 # 3. Apply Actions to Actuators
@@ -344,7 +373,8 @@ def main():
                     print(f"Step {step_count}")
                     print(f"  Command: [{command[0]:+.2f}, {command[1]:+.2f}, {command[2]:+.2f}]")
                     print(f"  Base ang vel: [{base_ang_vel[0]:+.3f}, {base_ang_vel[1]:+.3f}, {base_ang_vel[2]:+.3f}]")
-                    print(f"  Action mean: {action.mean():.3f}, std: {action.std():.3f}, range: [{action.min():.3f}, {action.max():.3f}]")
+                    print(f"  Raw action mean: {last_action.mean():.3f}, std: {last_action.std():.3f}, range: [{last_action.min():.3f}, {last_action.max():.3f}]")
+                    print(f"  Joint delta mean: {action.mean():.3f}, std: {action.std():.3f}, range: [{action.min():.3f}, {action.max():.3f}]")
                     print(f"  Base pos (xyz): [{data.qpos[0]:.3f}, {data.qpos[1]:.3f}, {data.qpos[2]:.3f}]")
                     print()
                 
