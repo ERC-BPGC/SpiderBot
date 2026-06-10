@@ -72,10 +72,8 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   upstream velocity defaults.
   """
   actor_terms = cfg.observations["actor"].terms
-  for name in ("base_lin_vel", "base_ang_vel", "projected_gravity", "joint_vel"):
-    actor_terms.pop(name, None)
-  if "height_scan" in actor_terms:
-    actor_terms["height_scan"].clip = (-1.0, 1.0)
+  actor_terms.pop("base_lin_vel", None)
+  actor_terms.pop("height_scan", None)
 
   actor_terms["joint_pos"].params = {
     "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
@@ -85,7 +83,24 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   actor_terms["joint_pos"].delay_min_lag = 1
   actor_terms["joint_pos"].delay_max_lag = 6
   actor_terms["joint_pos"].history_length = 3
+  actor_terms["joint_vel"].params = {
+    "asset_cfg": SceneEntityCfg("robot", joint_names=ACTUATED_JOINT_NAMES),
+  }
+  actor_terms["joint_vel"].scale = 0.05
+  actor_terms["joint_vel"].clip = (-5.0, 5.0)
+  actor_terms["joint_vel"].history_length = 3
   actor_terms["actions"].history_length = 3
+  cfg.observations["actor"].terms = {
+    name: actor_terms[name]
+    for name in (
+      "base_ang_vel",
+      "projected_gravity",
+      "joint_pos",
+      "joint_vel",
+      "actions",
+      "command",
+    )
+  }
 
   critic_terms = cfg.observations["critic"].terms
   critic_terms["base_lin_vel"].clip = (-10.0, 10.0)
