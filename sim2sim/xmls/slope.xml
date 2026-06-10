@@ -1,0 +1,42 @@
+<mujoco model="hexapod scene">
+  <include file="Hexapod_test.xml"/>
+
+  <statistic center="0 0 0.1" extent="1.2" meansize="0.04"/>
+
+  <visual>
+    <headlight diffuse=".8 .8 .8" ambient=".2 .2 .2" specular="1 1 1"/>
+    <rgba force="1 0 0 1"/>
+    <global azimuth="120" elevation="-20"/>
+    <map force="0.01"/>
+    <scale forcewidth="0.3" contactwidth="0.5" contactheight="0.2"/>
+    <quality shadowsize="8192"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2="1 1 1" width="800" height="800"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="1 1 1" rgb2="1 1 1" markrgb="0 0 0"
+      width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0"/>
+    <material name="stairs" rgba="1 1 1 1" reflectance=".8"/>
+  </asset>
+
+  <default>
+    <default class="stairs">
+      <geom material="stairs" contype="1" conaffinity="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <geom name="floor" size="0 0 0.01" material="groundplane" type="plane" contype="1" conaffinity="0"/>
+
+    <body name="slope" pos="3.0 0 0.25">
+      <!-- 30 degree slope around Y axis -->
+      <geom type="box" size="5 5 0.05" rgba="0.5 0.5 0.5 1" quat="0.99144486 0 -0.13052619 0"/>
+    </body>
+  </worldbody>
+
+
+  <keyframe>
+    <key name="home" qpos="0 0 0.35 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+  </keyframe>
+</mujoco>

@@ -126,6 +126,7 @@ def test_rough_velocity_training_has_curriculum_enabled() -> None:
   rough_training_tasks = [
     "Mjlab-Velocity-Rough-Unitree-G1",
     "Mjlab-Velocity-Rough-Unitree-Go1",
+    "Mjlab-Velocity-Rough-Spiderbot",
   ]
 
   for task_id in rough_training_tasks:
@@ -146,6 +147,7 @@ def test_rough_velocity_play_has_curriculum_disabled() -> None:
   rough_training_tasks = [
     "Mjlab-Velocity-Rough-Unitree-G1",
     "Mjlab-Velocity-Rough-Unitree-Go1",
+    "Mjlab-Velocity-Rough-Spiderbot",
   ]
 
   for task_id in rough_training_tasks:

@@ -16,3 +16,15 @@ from mjlab.asset_zoo.robots.unitree_go1.go1_constants import (
 from mjlab.asset_zoo.robots.unitree_go1.go1_constants import (
   get_go1_robot_cfg as get_go1_robot_cfg,
 )
+from mjlab.asset_zoo.robots.spider3d.spider3d_constants import (
+  SPIDER3D_ACTION_SCALE as SPIDER3D_ACTION_SCALE,
+)
+from mjlab.asset_zoo.robots.spider3d.spider3d_constants import (
+  get_spider3d_robot_cfg as get_spider3d_robot_cfg,
+)
+from mjlab.asset_zoo.robots.spiderbot.spiderbot_constants import (
+  SPIDERBOT_ACTION_SCALE as SPIDERBOT_ACTION_SCALE,
+)
+from mjlab.asset_zoo.robots.spiderbot.spiderbot_constants import (
+  get_spiderbot_robot_cfg as get_spiderbot_robot_cfg,
+)
