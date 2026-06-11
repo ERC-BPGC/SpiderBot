@@ -145,15 +145,24 @@
       </section>
 
       <section class="section interactive">
-        <div class="interactive__viewer" aria-label="Interactive MuJoCo demo placeholder">
-          <div class="interactive__grid"></div>
-          <div class="interactive__content">
+        <div class="section__header">
+          <p class="eyebrow">Interactive Demo</p>
+          <h2>Browser-based MuJoCo viewer.</h2>
+          <p>
+            This mjswan demo loads the Spiderbot MuJoCo model and a flat-ground locomotion policy
+            directly in the browser for lightweight interactive teleoperation.
+          </p>
+        </div>
+        <div class="interactive__viewer" aria-label="Interactive Spiderbot MuJoCo viewer">
+          <iframe
+            title="Interactive Spiderbot MuJoCo viewer"
+            src="interactive/"
+            loading="lazy"
+            allow="fullscreen; xr-spatial-tracking"
+          ></iframe>
+          <div class="interactive__fallback">
             <p class="eyebrow">Interactive Demo</p>
-            <h2>Live MuJoCo teleoperation coming soon.</h2>
-            <p>
-              A browser-embedded sim2sim viewer will let visitors command the hexapod in
-              MuJoCo and inspect the spring-assisted leg mechanism interactively.
-            </p>
+            <a href="interactive/">Open full viewer</a>
           </div>
         </div>
       </section>

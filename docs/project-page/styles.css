@@ -311,77 +311,53 @@ main {
 
 .interactive__viewer {
   position: relative;
-  min-height: 430px;
-  display: grid;
-  place-items: center;
+  aspect-ratio: 16 / 10;
+  min-height: 480px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    linear-gradient(135deg, rgba(24, 76, 67, 0.96), rgba(34, 47, 43, 0.96)),
-    #17211d;
+  background: #0c100e;
   box-shadow: var(--shadow);
 }
 
-.interactive__viewer::before,
-.interactive__viewer::after {
-  content: "";
+.interactive__viewer iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  border: 0;
+  background: #0c100e;
+}
+
+.interactive__fallback {
   position: absolute;
-  pointer-events: none;
-}
-
-.interactive__viewer::before {
-  inset: 12%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
   border-radius: 8px;
-}
-
-.interactive__viewer::after {
-  right: 28px;
-  bottom: 24px;
-  width: min(260px, 44%);
-  height: 68px;
-  border: 1px solid rgba(185, 241, 223, 0.24);
-  border-radius: 8px;
-  background:
-    linear-gradient(90deg, rgba(185, 241, 223, 0.24) 8px, transparent 8px) 18px 18px / 38px
-      10px repeat-x,
-    rgba(5, 12, 10, 0.18);
-}
-
-.interactive__grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.55;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
-}
-
-.interactive__content {
-  position: relative;
-  z-index: 1;
-  width: min(760px, calc(100% - 40px));
-  padding: 42px 28px;
+  background: rgba(0, 0, 0, 0.68);
   color: #fff;
-  text-align: center;
+  backdrop-filter: blur(10px);
 }
 
-.interactive__content .eyebrow {
+.interactive__fallback .eyebrow {
+  margin: 0;
   color: #b9f1df;
+  font-size: 0.68rem;
 }
 
-.interactive__content h2 {
+.interactive__fallback a {
   color: #fff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
 }
 
-.interactive__content p:last-child {
-  max-width: 660px;
-  margin: 18px auto 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 1.05rem;
+.interactive__fallback a:hover {
+  text-decoration: underline;
 }
 
 .payload__video {
@@ -458,6 +434,11 @@ pre {
   .highlights article {
     min-height: auto;
   }
+
+  .interactive__viewer,
+  .interactive__viewer iframe {
+    min-height: 420px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -472,5 +453,17 @@ pre {
 
   .theme-toggle__text {
     display: none;
+  }
+
+  .interactive__viewer,
+  .interactive__viewer iframe {
+    min-height: 360px;
+  }
+
+  .interactive__fallback {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    justify-content: space-between;
   }
 }

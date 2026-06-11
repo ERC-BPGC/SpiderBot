@@ -1,0 +1,199 @@
+{
+  "onnx": {
+    "path": "flat_policy.onnx"
+  },
+  "policy_joint_names": [
+    "robot/calf_motor_link_joint_leg_1",
+    "robot/parallel_link_top_joint_leg_1",
+    "robot/calf_motor_link_joint_leg_2",
+    "robot/parallel_link_top_joint_leg_2",
+    "robot/calf_motor_link_joint_leg_3",
+    "robot/parallel_link_top_joint_leg_3",
+    "robot/calf_motor_link_joint_leg_4",
+    "robot/parallel_link_top_joint_leg_4",
+    "robot/calf_motor_link_joint_leg_5",
+    "robot/parallel_link_top_joint_leg_5",
+    "robot/calf_motor_link_joint_leg_6",
+    "robot/parallel_link_top_joint_leg_6"
+  ],
+  "default_joint_pos": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "commands": {
+    "twist": {
+      "name": "UiCommand",
+      "ui": {
+        "inputs": [
+          {
+            "type": "slider",
+            "name": "lin_vel_x",
+            "label": "Forward Velocity",
+            "min": -0.5,
+            "max": 0.5,
+            "step": 0.05,
+            "default": 0.0
+          },
+          {
+            "type": "slider",
+            "name": "lin_vel_y",
+            "label": "Lateral Velocity",
+            "min": -0.5,
+            "max": 0.5,
+            "step": 0.05,
+            "default": 0.0
+          },
+          {
+            "type": "slider",
+            "name": "ang_vel_z",
+            "label": "Yaw Rate",
+            "min": -0.7,
+            "max": 0.7,
+            "step": 0.05,
+            "default": 0.0
+          }
+        ]
+      }
+    }
+  },
+  "observations": {
+    "policy": [
+      {
+        "name": "BuiltinSensor",
+        "sensor_name": "robot/imu_ang_vel",
+        "clip": [
+          -10.0,
+          10.0
+        ],
+        "history_steps": 3
+      },
+      {
+        "name": "ProjectedGravityB",
+        "clip": [
+          -1.5,
+          1.5
+        ],
+        "history_steps": 3
+      },
+      {
+        "name": "JointPos",
+        "subtract_default": true,
+        "history_steps": 3,
+        "entity_name": "robot",
+        "joint_names": [
+          "robot/calf_motor_link_joint_leg_1",
+          "robot/parallel_link_top_joint_leg_1",
+          "robot/calf_motor_link_joint_leg_2",
+          "robot/parallel_link_top_joint_leg_2",
+          "robot/calf_motor_link_joint_leg_3",
+          "robot/parallel_link_top_joint_leg_3",
+          "robot/calf_motor_link_joint_leg_4",
+          "robot/parallel_link_top_joint_leg_4",
+          "robot/calf_motor_link_joint_leg_5",
+          "robot/parallel_link_top_joint_leg_5",
+          "robot/calf_motor_link_joint_leg_6",
+          "robot/parallel_link_top_joint_leg_6"
+        ],
+        "pos_steps": [
+          2,
+          1,
+          0
+        ],
+        "default_joint_pos": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "clip": [
+          -5.0,
+          5.0
+        ]
+      },
+      {
+        "name": "JointVelocities",
+        "entity_name": "robot",
+        "joint_names": [
+          "robot/calf_motor_link_joint_leg_1",
+          "robot/parallel_link_top_joint_leg_1",
+          "robot/calf_motor_link_joint_leg_2",
+          "robot/parallel_link_top_joint_leg_2",
+          "robot/calf_motor_link_joint_leg_3",
+          "robot/parallel_link_top_joint_leg_3",
+          "robot/calf_motor_link_joint_leg_4",
+          "robot/parallel_link_top_joint_leg_4",
+          "robot/calf_motor_link_joint_leg_5",
+          "robot/parallel_link_top_joint_leg_5",
+          "robot/calf_motor_link_joint_leg_6",
+          "robot/parallel_link_top_joint_leg_6"
+        ],
+        "scale": 0.05,
+        "clip": [
+          -5.0,
+          5.0
+        ],
+        "history_steps": 3
+      },
+      {
+        "name": "PrevActions",
+        "history_steps": 3
+      },
+      {
+        "name": "GeneratedCommands",
+        "command_name": "twist"
+      }
+    ]
+  },
+  "actions": {
+    "joint_pos": {
+      "type": "joint_position",
+      "scale": {
+        "robot/calf_motor_link_joint_leg_1": 0.25,
+        "robot/parallel_link_top_joint_leg_1": 0.25,
+        "robot/calf_motor_link_joint_leg_2": 0.25,
+        "robot/parallel_link_top_joint_leg_2": 0.25,
+        "robot/calf_motor_link_joint_leg_3": 0.25,
+        "robot/parallel_link_top_joint_leg_3": 0.25,
+        "robot/calf_motor_link_joint_leg_4": 0.25,
+        "robot/parallel_link_top_joint_leg_4": 0.25,
+        "robot/calf_motor_link_joint_leg_5": 0.25,
+        "robot/parallel_link_top_joint_leg_5": 0.25,
+        "robot/calf_motor_link_joint_leg_6": 0.25,
+        "robot/parallel_link_top_joint_leg_6": 0.25
+      },
+      "actuator_names": [
+        "robot/calf_motor_link_joint_leg_1",
+        "robot/parallel_link_top_joint_leg_1",
+        "robot/calf_motor_link_joint_leg_2",
+        "robot/parallel_link_top_joint_leg_2",
+        "robot/calf_motor_link_joint_leg_3",
+        "robot/parallel_link_top_joint_leg_3",
+        "robot/calf_motor_link_joint_leg_4",
+        "robot/parallel_link_top_joint_leg_4",
+        "robot/calf_motor_link_joint_leg_5",
+        "robot/parallel_link_top_joint_leg_5",
+        "robot/calf_motor_link_joint_leg_6",
+        "robot/parallel_link_top_joint_leg_6"
+      ],
+      "use_default_offset": true
+    }
+  }
+}
