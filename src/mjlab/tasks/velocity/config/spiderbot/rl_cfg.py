@@ -44,6 +44,7 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
     logger="wandb",
     wandb_project="spiderbot_mjlab",
     wandb_tags=(),
+    clip_actions=2.0,
     save_interval=100,
     num_steps_per_env=24,
     max_iterations=10_000,

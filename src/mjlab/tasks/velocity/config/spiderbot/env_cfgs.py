@@ -11,6 +11,7 @@ from mjlab.envs import mdp as envs_mdp
 from mjlab.envs.mdp.actions import JointPositionActionCfg
 from mjlab.managers.event_manager import EventTermCfg
 from mjlab.managers.scene_entity_config import SceneEntityCfg
+from mjlab.managers.termination_manager import TerminationTermCfg
 from mjlab.sensor import (
   ContactMatch,
   ContactSensorCfg,
@@ -71,6 +72,9 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   This intentionally lives in the Spiderbot config rather than changing mjlab's
   upstream velocity defaults.
   """
+  cfg.observations["actor"].nan_policy = "error"
+  cfg.observations["critic"].nan_policy = "error"
+
   actor_terms = cfg.observations["actor"].terms
   actor_terms.pop("base_lin_vel", None)
   actor_terms.pop("height_scan", None)
@@ -211,9 +215,10 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   cfg.rewards["track_linear_velocity"].params["std"] = 0.1**0.5
   cfg.rewards["track_angular_velocity"].params["std"] = 0.50**0.5
   # This reward is computed on raw policy actions, not the scaled/clipped joint
-  # targets. Keep it moderate so a brief exploration spike cannot dominate the
-  # return and destabilize PPO.
+  # targets. The runner clips raw actions to [-2, 2], but clip the weighted
+  # reward rate too so a single transition cannot dominate PPO statistics.
   cfg.rewards["action_rate_l2"].weight = -0.1
+  cfg.rewards["action_rate_l2"].clip = (-25.0, 0.0)
   cfg.rewards["air_time"].weight = 1.0
   cfg.rewards["air_time"].params["threshold_min"] = 0.25
   cfg.rewards["air_time"].params["threshold_max"] = 0.75
@@ -258,6 +263,10 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   cfg.sim.mujoco.ls_iterations = 50
 
   cfg.decimation = 5
+
+  cfg.terminations["nan_detection"] = TerminationTermCfg(
+    func=envs_mdp.nan_detection,
+  )
 
 
 def _apply_spiderbot_terrain_tuning(cfg: ManagerBasedRlEnvCfg) -> None:

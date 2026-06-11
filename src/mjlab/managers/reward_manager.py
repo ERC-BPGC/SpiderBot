@@ -26,6 +26,9 @@ class RewardTermCfg(ManagerTermBaseCfg):
   weight: float
   """Weight multiplier for this reward term."""
 
+  clip: tuple[float, float] | None = None
+  """Optional min/max clip on the weighted reward rate before dt scaling."""
+
 
 class RewardManager(ManagerBase):
   """Manages reward computation by aggregating weighted reward terms.
@@ -124,12 +127,19 @@ class RewardManager(ManagerBase):
         continue
       value = term_cfg.func(self._env, **term_cfg.params)
       self._check_term_shape(name, value)
-      value = value * term_cfg.weight * scale
+      weighted_rate = value * term_cfg.weight
       # NaN/Inf can occur from corrupted physics state; zero them to avoid policy crash.
-      value = torch.nan_to_num(value, nan=0.0, posinf=0.0, neginf=0.0)
+      weighted_rate = torch.nan_to_num(
+        weighted_rate, nan=0.0, posinf=0.0, neginf=0.0
+      )
+      if term_cfg.clip is not None:
+        weighted_rate = weighted_rate.clamp(
+          min=term_cfg.clip[0], max=term_cfg.clip[1]
+        )
+      value = weighted_rate * scale
       self._reward_buf += value
       self._episode_sums[name] += value
-      self._step_reward[:, term_idx] = value / scale
+      self._step_reward[:, term_idx] = weighted_rate
     return self._reward_buf
 
   def debug_vis(self, visualizer: DebugVisualizer) -> None:
