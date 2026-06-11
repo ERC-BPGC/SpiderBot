@@ -1,0 +1,47 @@
+name: project-page
+
+on:
+  push:
+    branches:
+      - spiderbot-upstream-refresh
+    paths:
+      - "docs/project-page/**"
+      - ".github/workflows/project-page.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Stage project page
+        run: |
+          mkdir -p _site
+          cp -R docs/project-page/. _site/
+          touch _site/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
