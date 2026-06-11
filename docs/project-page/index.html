@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Project page for an open-source, energy-efficient hexapod research platform with spring-assisted 2-DOF legs and RL sim-to-real locomotion."
+    />
+    <title>Open-Source Energy-Efficient Hexapod Research Platform</title>
+    <script>
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark theme">
+      <span class="theme-toggle__icon" aria-hidden="true"></span>
+      <span class="theme-toggle__text">Theme</span>
+    </button>
+
+    <header class="hero">
+      <video class="hero__video" autoplay muted loop playsinline poster="assets/photos/spidy.jpeg">
+        <source src="assets/videos/header.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__shade"></div>
+      <div class="hero__content">
+        <p class="venue">IROS 2026 Submission</p>
+        <h1>Design and Development of an Open-Source Energy-Efficient Hexapod Research Platform</h1>
+        <p class="authors">Ritwik Sharma · Saransh Agrawal · Vimarsh Shah</p>
+        <nav class="links" aria-label="Project links">
+          <a href="#" aria-label="Paper link placeholder">Paper</a>
+          <a href="#" aria-label="arXiv link placeholder">arXiv</a>
+          <a href="https://github.com/ritwik10/mjlab_spiderbot">Code</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro section">
+        <div class="intro__media">
+          <img src="assets/photos/spidy.jpeg" alt="The spring-assisted hexapod robot on grass." />
+        </div>
+        <div class="intro__text">
+          <p class="eyebrow">Open-source hexapod platform</p>
+          <h2>Spring-assisted 2-DOF legs for energy-efficient locomotion.</h2>
+          <p>
+            This platform uses a passive spring-assisted four-bar leg mechanism to support body
+            weight mechanically, reducing standing power while keeping the robot low-cost,
+            manufacturable, and suitable for reinforcement-learning locomotion research.
+          </p>
+          <p>
+            The robot is validated in simulation and hardware on flat ground, rough terrain,
+            slopes, and payload-carrying trials, with training and deployment code built on mjlab.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <p class="eyebrow">Highlights</p>
+          <h2>Designed for accessible, energy-aware legged robotics research.</h2>
+        </div>
+        <div class="highlights">
+          <article>
+            <strong>2-DOF spring legs</strong>
+            <span>Four-bar linkage with passive spring support reduces continuous stance torque.</span>
+          </article>
+          <article>
+            <strong>Low-cost build</strong>
+            <span>3D-printed structure and off-the-shelf components target a sub-$400 platform.</span>
+          </article>
+          <article>
+            <strong>RL sim-to-real</strong>
+            <span>Policies trained in mjlab transfer to hardware despite closed-loop kinematics.</span>
+          </article>
+          <article>
+            <strong>Payload capable</strong>
+            <span>Validated with a maximum payload of 3.75 kg, about 1.25x the robot's weight.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section mechanism">
+        <div class="mechanism__text">
+          <p class="eyebrow">Mechanism</p>
+          <h2>Passive support without giving up terrain locomotion.</h2>
+          <p>
+            The leg design trades the conventional third actuated degree of freedom for a
+            spring-loaded parallel linkage. The mechanism is represented in MuJoCo using equality
+            constraints and tendon springs, while the learned policy controls the two actuated joints
+            on each leg.
+          </p>
+        </div>
+        <video class="feature-video" autoplay muted loop playsinline controls>
+          <source src="assets/videos/leg_animation.mp4" type="video/mp4" />
+        </video>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <p class="eyebrow">Locomotion</p>
+          <h2>Simulation and hardware trials across terrain conditions.</h2>
+        </div>
+        <div class="video-grid">
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/flat_sim.mp4" type="video/mp4" />
+            </video>
+            <h3>Flat Terrain · Sim</h3>
+          </article>
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/flat_hw.mp4" type="video/mp4" />
+            </video>
+            <h3>Flat Terrain · Hardware</h3>
+          </article>
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/rough_sim.mp4" type="video/mp4" />
+            </video>
+            <h3>Rough Terrain · Sim</h3>
+          </article>
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/rough_hw.mp4" type="video/mp4" />
+            </video>
+            <h3>Rough Terrain · Hardware</h3>
+          </article>
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/slope_sim.mp4" type="video/mp4" />
+            </video>
+            <h3>Slope · Sim</h3>
+          </article>
+          <article>
+            <video autoplay muted loop playsinline controls>
+              <source src="assets/videos/slope_hw.mp4" type="video/mp4" />
+            </video>
+            <h3>Slope · Hardware</h3>
+          </article>
+        </div>
+      </section>
+
+      <section class="section interactive">
+        <div class="interactive__viewer" aria-label="Interactive MuJoCo demo placeholder">
+          <div class="interactive__grid"></div>
+          <div class="interactive__content">
+            <p class="eyebrow">Interactive Demo</p>
+            <h2>Live MuJoCo teleoperation coming soon.</h2>
+            <p>
+              A browser-embedded sim2sim viewer will let visitors command the hexapod in
+              MuJoCo and inspect the spring-assisted leg mechanism interactively.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section payload">
+        <div class="section__header">
+          <p class="eyebrow">Payload</p>
+          <h2>Passive compensation under additional load.</h2>
+          <p>
+            Payload trials evaluate whether the spring-assisted leg design maintains its energy
+            efficiency advantage when the platform carries additional mass.
+          </p>
+        </div>
+        <div class="payload__media">
+          <video class="payload__video" autoplay muted loop playsinline controls>
+            <source src="assets/videos/payload.mp4" type="video/mp4" />
+          </video>
+          <div class="payload__label">
+            <span>Maximum payload trial</span>
+            <strong>3.75 kg · 1.25x robot weight</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section citation">
+        <div class="section__header">
+          <p class="eyebrow">Citation</p>
+          <h2>BibTeX</h2>
+        </div>
+        <pre><code>@misc{spiderbot2026,
+  title = {Design and Development of an Open-Source Energy-Efficient Hexapod Research Platform},
+  author = {Sharma, Ritwik and Agrawal, Saransh and Shah, Vimarsh},
+  year = {2026},
+  note = {To appear}
+}</code></pre>
+      </section>
+    </main>
+    <script>
+      const button = document.querySelector(".theme-toggle");
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem("theme", theme);
+        button.setAttribute("aria-pressed", theme === "dark");
+      };
+      button.addEventListener("click", () => {
+        const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        setTheme(nextTheme);
+      });
+      setTheme(document.documentElement.dataset.theme || "light");
+    </script>
+  </body>
+</html>
