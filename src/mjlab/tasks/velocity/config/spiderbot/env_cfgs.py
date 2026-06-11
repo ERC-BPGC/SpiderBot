@@ -156,6 +156,7 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   twist_cmd.ranges.lin_vel_x = (-0.5, 0.5)
   twist_cmd.ranges.lin_vel_y = (-0.5, 0.5)
   twist_cmd.ranges.ang_vel_z = (-0.7, 0.7)
+  twist_cmd.rel_world_envs = 0.35
 
   cfg.events["reset_base"].params["velocity_range"] = {
     "x": (-0.3, 0.3),
@@ -235,25 +236,24 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
       "ang_vel_z": (-0.4, 0.4),
     },
     {
-      "step": 1500 * 24,
-      "lin_vel_x": (-0.18, 0.18),
-      "lin_vel_y": (-0.18, 0.18),
+      "step": 750 * 24,
+      "lin_vel_x": (-0.2, 0.2),
+      "lin_vel_y": (-0.2, 0.2),
       "ang_vel_z": (-0.5, 0.5),
     },
     {
-      "step": 2500 * 24,
-      "lin_vel_x": (-0.25, 0.25),
+      "step": 1500 * 24,
+      "lin_vel_x": (-0.3, 0.3),
       "lin_vel_y": (-0.25, 0.25),
-      "ang_vel_z": (-0.55, 0.55),
+      "ang_vel_z": (-0.75, 0.75),
     },
     {
-      "step": 3500 * 24,
+      "step": 2500 * 24,
       "lin_vel_x": (-0.4, 0.4),
       "lin_vel_y": (-0.4, 0.4),
-      "ang_vel_z": (-0.7, 0.7),
+      "ang_vel_z": (-1.0, 1.0),
     },
-    {"step": 5500 * 24, "lin_vel_x": (-0.5, 0.5), "lin_vel_y": (-0.5, 0.5)},
-    {"step": 7500 * 24, "lin_vel_x": (-0.6, 0.6), "lin_vel_y": (-0.5, 0.5)},
+    {"step": 3500 * 24, "lin_vel_x": (-0.5, 0.5), "lin_vel_y": (-0.5, 0.5)},
   ]
 
   # The closed-loop leg linkage is represented by equality constraints. Keep the

@@ -27,12 +27,12 @@ def get_spec() -> mujoco.MjSpec:
 
 # Calf motors
 CALF_KP = 10.0
-CALF_KV = 1.0
+CALF_KV = 0.25
 CALF_CTRL_RANGE = (-0.75, 0.75)
 
 # Parallel top motors
 PARALLEL_TOP_KP = 10.0
-PARALLEL_TOP_KV = 0.8
+PARALLEL_TOP_KV = 0.15
 PARALLEL_TOP_CTRL_RANGE = (-0.4, 0.625)
 
 # Reasonable defaults for missing values
