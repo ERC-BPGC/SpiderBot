@@ -2,6 +2,8 @@ wandb/
 logs/
 onnx/
 videos/
+!docs/project-page/assets/videos/
+!docs/project-page/assets/videos/*.mp4
 __pycache__/
 MUJOCO_LOG.TXT
 debug.py
