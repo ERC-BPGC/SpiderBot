@@ -15,9 +15,12 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
       activation="elu",
       obs_normalization=False,
       distribution_cfg={
-        "class_name": "GaussianDistribution",
-        "init_std": 1.0,
-        "std_type": "scalar",
+        # Spiderbot's closed-loop linkage is sensitive to rare extreme actions.
+        # Use RSL-RL's bounded distribution so sampled actions, rollout storage,
+        # action observations, and action-rate rewards all share the same finite
+        # support without changing PPO itself.
+        "class_name": "BetaDistribution",
+        "action_range": (-2.0, 2.0),
       },
     ),
     critic=RslRlModelCfg(
