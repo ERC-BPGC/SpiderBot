@@ -20,16 +20,16 @@ from history_obs import (
 # Configuration
 # ============================================================================
 
-XML_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/sim2sim/xmls/flat_terrain.xml"
-ONNX_MODEL_PATH = "/media/marmot/606de469-2f76-4155-82bc-e2e657636ad7/Ritwik/mjlab_alt/sim2sim/policies/t2.onnx"
+XML_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/sim2sim/xmls/flat_terrain.xml"
+ONNX_MODEL_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/logs/rsl_rl/spiderbot_velocity/2026-06-11_19-52-02/2026-06-11_19-52-02.onnx"  # Path to your exported ONNX model
 
-CONTROL_FREQ = 50       # Hz
+CONTROL_FREQ = 40       # Hz: 0.005s physics timestep * mjlab decimation 5
 ACTION_SCALE = 0.25
 RAW_ACTION_CLIP = 2.0
 DEFAULT_HISTORY_LENGTH = 3
 
 ROBOT_MASS_KG = 3.0     # kg — update if different
-COMMAND_VEL_X = 0.0     # m/s forward command during locomotion phase
+COMMAND_VEL_X = 0.25     # m/s forward command during locomotion phase
 
 # Experiment phases (in control steps at 50 Hz)
 STILL_STEPS       = 100   # 2 s standing still

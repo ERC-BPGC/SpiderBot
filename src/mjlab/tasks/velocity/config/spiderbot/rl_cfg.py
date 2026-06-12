@@ -20,7 +20,7 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
         # action observations, and action-rate rewards all share the same finite
         # support without changing PPO itself.
         "class_name": "BetaDistribution",
-        "action_range": (-2.0, 2.0),
+        "action_range": (-3.0, 3.0),
       },
     ),
     critic=RslRlModelCfg(
@@ -47,7 +47,7 @@ def spiderbot_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
     logger="wandb",
     wandb_project="spiderbot_mjlab",
     wandb_tags=(),
-    save_interval=100,
+    save_interval=500,
     num_steps_per_env=24,
-    max_iterations=10_000,
+    max_iterations=5_000,
   )

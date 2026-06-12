@@ -22,9 +22,9 @@ from history_obs import (
 # ============================================================================
 
 XML_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/sim2sim/xmls/flat_terrain.xml"
-ONNX_MODEL_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/logs/rsl_rl/spiderbot_velocity/2026-06-10_23-59-58/2026-06-10_23-59-58.onnx"  # Path to your exported ONNX model
+ONNX_MODEL_PATH = "/home/marmot/Ritwik/mjlab_spiderbot/logs/rsl_rl/spiderbot_velocity/2026-06-11_19-52-02/2026-06-11_19-52-02.onnx"  # Path to your exported ONNX model
 
-CONTROL_FREQ = 50  # Hz (policy runs at 50 Hz)
+CONTROL_FREQ = 40  # Hz: 0.005s physics timestep * mjlab decimation 5
 ACTION_SCALE = 0.25  # Spiderbot action scale from MJLab env config.
 RAW_ACTION_CLIP = 2.0
 DEFAULT_HISTORY_LENGTH = 3
@@ -293,8 +293,9 @@ def main():
                     print(f"\n{'='*60}")
                     print(f"ACTIVATING FORWARD COMMAND at step {step_count}")
                     print(f"{'='*60}\n")
-                    cmd_interface.lin_vel_x = 0.5  # Move forward
-                    # cmd_interface.ang_vel_z = 0.25  # Uncomment to test turning
+                    # cmd_interface.lin_vel_x = 0.5  
+                    # cmd_interface.lin_vel_y = 0.35  
+                    cmd_interface.ang_vel_z = 0.75  # Uncomment to test turning
                 
                 # You can also add step-based command changes:
                 # if step_count == 300:

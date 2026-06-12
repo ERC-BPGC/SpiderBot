@@ -2,25 +2,36 @@
 <mujoco model="Hexapod_V2">
   <compiler angle="radian" meshdir="./assets" />
 
-  <option gravity="0 0 -9.81" timestep="0.005" iterations="50" ls_iterations="50">
+  <option
+      gravity="0 0 -9.81"
+      timestep="0.005"
+      integrator="implicitfast"
+      solver="Newton"
+      jacobian="auto"
+      cone="pyramidal"
+      iterations="50"
+      tolerance="1e-8"
+      ls_iterations="50"
+      ls_tolerance="0.01"
+      ccd_iterations="5">
     <flag contact="enable" gravity="enable" />
   </option>
   
   <default>
     <default class="spider">
       <default class="calf_motor">
-        <joint axis="0 0 1" range="-0.75 0.75" damping="0.45" armature="0.018" frictionloss="0.04"/>
+        <joint axis="0 0 1" range="-0.75 0.75" damping="1.0" armature="0.1" frictionloss="0.1"/>
         <general ctrlrange="-0.75 0.75"/>
       </default>
       <default class="parallel_top">
-        <joint axis="0 1 0" range="-0.4 0.625" damping="0.6" armature="0.028" frictionloss="0.052"/>
+        <joint axis="0 1 0" range="-0.4 0.625" damping="1.0" armature="0.1" frictionloss="0.1"/>
         <general ctrlrange="-0.75 0.75"/>
       </default>
       <default class="last_link">
-        <joint axis="0 0 1" range="-0.785398 0.785398" />
+        <joint axis="0 0 1" range="-0.785398 0.785398" damping="1.0"/>
       </default>
       <default class="parallel_bottom">
-        <joint axis="0 1 0" range="-0.785398 0.785398" />
+        <joint axis="0 1 0" range="-0.785398 0.785398" damping="1.0"/>
       </default>
       <default class="visual">
         <geom type="mesh" contype="0" conaffinity="0" group="1" />
@@ -346,23 +357,23 @@
 
   <actuator>
     
-    <position name="calf_motor_actuator_leg_1" joint="calf_motor_link_joint_leg_1" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_1" joint="parallel_link_top_joint_leg_1" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_1" joint="calf_motor_link_joint_leg_1" ctrlrange="-0.9 0.9" kp="10.0" dampratio="5" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_1" joint="parallel_link_top_joint_leg_1" ctrlrange="-0.6 0.825" kp="10.0" dampratio="5"  forcerange="-2.5 2.5"/>
 
-    <position name="calf_motor_actuator_leg_2" joint="calf_motor_link_joint_leg_2" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_2" joint="parallel_link_top_joint_leg_2" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_2" joint="calf_motor_link_joint_leg_2" ctrlrange="-0.9 0.9" kp="10.0" kv="0.25" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_2" joint="parallel_link_top_joint_leg_2" ctrlrange="-0.6 0.825" kp="10.0" kv="0.15" forcerange="-2.0 2.0"/>
 
-    <position name="calf_motor_actuator_leg_3" joint="calf_motor_link_joint_leg_3" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_3" joint="parallel_link_top_joint_leg_3" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_3" joint="calf_motor_link_joint_leg_3" ctrlrange="-0.9 0.9" kp="10.0" kv="0.25" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_3" joint="parallel_link_top_joint_leg_3" ctrlrange="-0.6 0.825" kp="10.0" kv="0.15" forcerange="-2.0 2.0"/>
 
-    <position name="calf_motor_actuator_leg_4" joint="calf_motor_link_joint_leg_4" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_4" joint="parallel_link_top_joint_leg_4" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_4" joint="calf_motor_link_joint_leg_4" ctrlrange="-0.9 0.9" kp="10.0" kv="0.25" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_4" joint="parallel_link_top_joint_leg_4" ctrlrange="-0.6 0.825" kp="10.0" kv="0.15" forcerange="-2.0 2.0"/>
     
-    <position name="calf_motor_actuator_leg_5" joint="calf_motor_link_joint_leg_5" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_5" joint="parallel_link_top_joint_leg_5" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_5" joint="calf_motor_link_joint_leg_5" ctrlrange="-0.9 0.9" kp="10.0" kv="0.25" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_5" joint="parallel_link_top_joint_leg_5" ctrlrange="-0.6 0.825" kp="10.0" kv="0.15" forcerange="-2.0 2.0"/>
 
-    <position name="calf_motor_actuator_leg_6" joint="calf_motor_link_joint_leg_6" ctrlrange="-0.75 0.75" kp="10.0" kv="1.0" forcerange="-1.5 1.5"/>
-    <position name="parallel_link_top_actuator_leg_6" joint="parallel_link_top_joint_leg_6" ctrlrange="-0.4 0.625" kp="10.0" kv="0.8" forcerange="-2.0 2.0"/>
+    <position name="calf_motor_actuator_leg_6" joint="calf_motor_link_joint_leg_6" ctrlrange="-0.9 0.9" kp="10.0" kv="0.25" forcerange="-1.5 1.5"/>
+    <position name="parallel_link_top_actuator_leg_6" joint="parallel_link_top_joint_leg_6" ctrlrange="-0.6 0.825" kp="10.0" kv="0.15" forcerange="-2.0 2.0"/>
   </actuator>
 
   <sensor>

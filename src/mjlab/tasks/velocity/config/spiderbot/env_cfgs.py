@@ -147,8 +147,8 @@ def _apply_spiderbot_velocity_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   assert isinstance(joint_pos_action, JointPositionActionCfg)
   joint_pos_action.scale = SPIDERBOT_ACTION_SCALE
   joint_pos_action.clip = {
-    r"calf_motor_link_joint_leg_\d+": (-0.65, 0.65),
-    r"parallel_link_top_joint_leg_\d+": (-0.35, 0.55),
+    r"calf_motor_link_joint_leg_\d+": (-0.75, 0.75),
+    r"parallel_link_top_joint_leg_\d+": (-0.4, 0.625),
   }
 
   twist_cmd = cfg.commands["twist"]

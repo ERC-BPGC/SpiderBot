@@ -10,11 +10,11 @@
     <default class="spider">
       <!-- <geom friction="0.6" margin="0.005" condim="1" /> -->
       <default class="calf_motor">
-        <joint axis="0 0 1" range="-0.75 0.75" damping="0.3" armature="0.015" frictionloss="0.03"/>
+        <joint axis="0 0 1" range="-0.75 0.75" damping="1.0" armature="0.1" frictionloss="0.1"/>
         <general ctrlrange="-0.75 0.75"/>
       </default>
       <default class="parallel_top">
-        <joint axis="0 1 0" range="-0.4 0.625" damping="0.6" armature="0.028" frictionloss="0.052"/>
+        <joint axis="0 1 0" range="-0.4 0.625" damping="1.0" armature="0.1" frictionloss="0.1"/>
         <general ctrlrange="-0.75 0.75"/>
       </default>
       <default class="last_link">
