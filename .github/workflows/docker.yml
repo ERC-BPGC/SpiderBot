@@ -33,6 +33,8 @@ permissions:
 
 jobs:
   check_paths:
+    # This inherited workflow publishes to the upstream mjlab registry only.
+    if: github.repository == 'mujocolab/mjlab'
     runs-on: ubuntu-22.04
     outputs:
       build: ${{ steps.filter.outputs.any }}

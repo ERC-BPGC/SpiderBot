@@ -6,7 +6,7 @@ This repository contains the simulation and learning codebase for the paper
 **Design and Development of an Open-Source Energy-Efficient Hexapod Research
 Platform**.
 
-[![Project page](https://img.shields.io/badge/Project_Page-Visit-2563eb?style=flat-square)](https://maker-rat.github.io/mjlab_spiderbot/)
+[![Project page](https://img.shields.io/badge/Project_Page-Visit-2563eb?style=flat-square)](https://erc-bpgc.github.io/SpiderBot/)
 <img src="https://img.shields.io/badge/arXiv-Coming_soon-b31b1b?style=flat-square" alt="arXiv paper coming soon" />
 
 The code is built as a Spiderbot-focused fork of
@@ -15,6 +15,8 @@ velocity-tracking tasks, and sim2sim XMLs for a closed-loop linkage Spiderbot
 platform.
 
 The original MJLab README is preserved as [README_mjlab.md](README_mjlab.md).
+The club's earlier code and history are preserved on the
+[V1 branch](https://github.com/ERC-BPGC/SpiderBot/tree/V1).
 
 ## What's Included
 
@@ -39,8 +41,8 @@ MJLab training requires an NVIDIA GPU. The recommended setup uses
 [uv](https://docs.astral.sh/uv/):
 
 ```bash
-git clone https://github.com/Maker-Rat/mjlab_spiderbot.git
-cd mjlab_spiderbot
+git clone https://github.com/ERC-BPGC/SpiderBot.git
+cd SpiderBot
 uv sync --extra cu128 --group dev
 ```
 

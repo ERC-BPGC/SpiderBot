@@ -158,7 +158,7 @@ def main() -> None:
   default_joint_pos = [0.0 for _ in ACTUATED_JOINT_NAMES]
 
   builder = mjswan.Builder(
-    base_path="/mjlab_spiderbot/interactive/",
+    base_path="/SpiderBot/interactive/",
     debug=True,
   )
   project = builder.add_project(name="Spiderbot Interactive Demo")
