@@ -1,4 +1,4 @@
-name: project-page
+name: SpiderBot project page
 
 on:
   push:
