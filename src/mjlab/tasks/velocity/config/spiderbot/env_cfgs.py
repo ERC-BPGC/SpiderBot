@@ -1,6 +1,6 @@
 """Spiderbot velocity environment configurations."""
 
-from typing import Literal
+from typing import Literal, cast
 
 from mjlab.asset_zoo.robots import (
   SPIDERBOT_ACTION_SCALE,
@@ -22,6 +22,12 @@ from mjlab.sensor import (
 )
 from mjlab.tasks.velocity.mdp import UniformVelocityCommandCfg
 from mjlab.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
+from mjlab.terrains.heightfield_terrains import (
+  HfPyramidSlopedTerrainCfg,
+  HfRandomUniformTerrainCfg,
+  HfWaveTerrainCfg,
+)
+from mjlab.terrains.primitive_terrains import BoxPyramidStairsTerrainCfg
 from mjlab.utils.noise import UniformNoiseCfg as Unoise
 
 TerrainType = Literal["rough", "obstacles"]
@@ -274,15 +280,29 @@ def _apply_spiderbot_terrain_tuning(cfg: ManagerBasedRlEnvCfg) -> None:
   if cfg.scene.terrain is None or cfg.scene.terrain.terrain_generator is None:
     return
   sub_terrains = cfg.scene.terrain.terrain_generator.sub_terrains
-  sub_terrains["pyramid_stairs"].step_height_range = (0.0, 0.05)
-  sub_terrains["pyramid_stairs"].step_width = 0.5
-  sub_terrains["pyramid_stairs_inv"].step_height_range = (0.0, 0.05)
-  sub_terrains["pyramid_stairs_inv"].step_width = 0.5
-  sub_terrains["hf_pyramid_slope"].slope_range = (0.0, 0.35)
-  sub_terrains["hf_pyramid_slope_inv"].slope_range = (0.0, 0.35)
-  sub_terrains["random_rough"].noise_range = (0.0, 0.05)
-  sub_terrains["random_rough"].noise_step = 0.005
-  sub_terrains["wave_terrain"].amplitude_range = (0.0, 0.065)
+  cast(BoxPyramidStairsTerrainCfg, sub_terrains["pyramid_stairs"]).step_height_range = (
+    0.0,
+    0.05,
+  )
+  cast(BoxPyramidStairsTerrainCfg, sub_terrains["pyramid_stairs"]).step_width = 0.5
+  cast(
+    BoxPyramidStairsTerrainCfg, sub_terrains["pyramid_stairs_inv"]
+  ).step_height_range = (0.0, 0.05)
+  cast(BoxPyramidStairsTerrainCfg, sub_terrains["pyramid_stairs_inv"]).step_width = 0.5
+  cast(HfPyramidSlopedTerrainCfg, sub_terrains["hf_pyramid_slope"]).slope_range = (
+    0.0,
+    0.35,
+  )
+  cast(HfPyramidSlopedTerrainCfg, sub_terrains["hf_pyramid_slope_inv"]).slope_range = (
+    0.0,
+    0.35,
+  )
+  cast(HfRandomUniformTerrainCfg, sub_terrains["random_rough"]).noise_range = (
+    0.0,
+    0.05,
+  )
+  cast(HfRandomUniformTerrainCfg, sub_terrains["random_rough"]).noise_step = 0.005
+  cast(HfWaveTerrainCfg, sub_terrains["wave_terrain"]).amplitude_range = (0.0, 0.065)
 
 
 def spiderbot_rough_env_cfg(
@@ -311,9 +331,7 @@ def spiderbot_rough_env_cfg(
     num_slots=1,
     track_air_time=True,
   )
-  cfg.scene.sensors = (cfg.scene.sensors or ()) + (
-    feet_ground_cfg,
-  )
+  cfg.scene.sensors = (cfg.scene.sensors or ()) + (feet_ground_cfg,)
 
   if cfg.scene.terrain is not None and cfg.scene.terrain.terrain_generator is not None:
     cfg.scene.terrain.terrain_generator.curriculum = True

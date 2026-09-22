@@ -7,10 +7,11 @@ and tendon spring behavior before adding ONNX policy control.
 
 from __future__ import annotations
 
+import importlib
 import os
 import sys
 from pathlib import Path
-
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MJSWAN_SRC = REPO_ROOT.parent / "mjswan" / "src"
@@ -55,18 +56,21 @@ def _patch_mjswan_nodeenv_path() -> None:
   machine npm's shebang uses ``/usr/bin/env node``, so the nodeenv bin directory
   still needs to be on PATH.
   """
-  from mjswan._build_client import ClientBuilder
+  # Optional source checkout resolved at runtime through MJSWAN_SRC.
+  ClientBuilder = importlib.import_module("mjswan._build_client").ClientBuilder
 
   original_install_dependencies = ClientBuilder.install_dependencies
   original_run_build_script = ClientBuilder.run_build_script
 
-  def _with_nodeenv_path(builder: ClientBuilder) -> str:
-    nodeenv_bin = str(builder.nodeenv_dir / ("Scripts" if sys.platform == "win32" else "bin"))
+  def _with_nodeenv_path(builder: Any) -> str:
+    nodeenv_bin = str(
+      builder.nodeenv_dir / ("Scripts" if sys.platform == "win32" else "bin")
+    )
     old_path = os.environ.get("PATH", "")
     os.environ["PATH"] = f"{nodeenv_bin}{os.pathsep}{old_path}"
     return old_path
 
-  def install_dependencies(self: ClientBuilder, clean: bool = False) -> None:
+  def install_dependencies(self: Any, clean: bool = False) -> None:
     old_path = _with_nodeenv_path(self)
     try:
       original_install_dependencies(self, clean=clean)
@@ -74,7 +78,7 @@ def _patch_mjswan_nodeenv_path() -> None:
       os.environ["PATH"] = old_path
 
   def run_build_script(
-    self: ClientBuilder,
+    self: Any,
     script_name: str = "build",
     env: dict[str, str] | None = None,
   ) -> None:
@@ -127,10 +131,14 @@ def _patch_mjswan_history_order() -> None:
 def main() -> None:
   _add_mjswan_to_path()
 
-  import mjlab.tasks  # noqa: F401 - populate the mjlab task registry.
-  import mjswan
+  mjswan = importlib.import_module("mjswan")
   import onnx
-  from mjswan.envs.mdp.actions import JointPositionActionCfg
+
+  JointPositionActionCfg = importlib.import_module(
+    "mjswan.envs.mdp.actions"
+  ).JointPositionActionCfg
+
+  import mjlab.tasks  # noqa: F401 - populate the mjlab task registry.
   from mjlab.tasks.registry import load_env_cfg
 
   _patch_mjswan_nodeenv_path()

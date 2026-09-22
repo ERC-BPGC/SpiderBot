@@ -2,8 +2,8 @@ from mjlab.tasks.registry import register_mjlab_task
 from mjlab.tasks.velocity.rl import VelocityOnPolicyRunner
 
 from .env_cfgs import (
-  spider3d_rough_env_cfg,
   spider3d_flat_env_cfg,
+  spider3d_rough_env_cfg,
 )
 from .rl_cfg import spider3d_ppo_runner_cfg
 

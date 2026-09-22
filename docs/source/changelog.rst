@@ -8,6 +8,10 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Added Spiderbot hardware deployment scripts, legacy policies, and SolidWorks
+  mechanical assets with setup documentation.
+- Added configurable paths for standalone Spiderbot scripts.
+
 - Added ``BuiltinDcMotorActuator``, a native MuJoCo ``<dcmotor>`` wrapper.
   Supports voltage / position / velocity input modes with back-EMF,
   configurable motor constants, and optional integral, slew, inductance,

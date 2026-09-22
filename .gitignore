@@ -19,3 +19,7 @@ benchmark_results/
 # Documentation outputs.
 **/_build/*
 **/generated/*
+
+# Local editor backups and hardware logs.
+*.save
+sim2real/actions_log_hardware.csv

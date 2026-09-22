@@ -129,13 +129,9 @@ class RewardManager(ManagerBase):
       self._check_term_shape(name, value)
       weighted_rate = value * term_cfg.weight
       # NaN/Inf can occur from corrupted physics state; zero them to avoid policy crash.
-      weighted_rate = torch.nan_to_num(
-        weighted_rate, nan=0.0, posinf=0.0, neginf=0.0
-      )
+      weighted_rate = torch.nan_to_num(weighted_rate, nan=0.0, posinf=0.0, neginf=0.0)
       if term_cfg.clip is not None:
-        weighted_rate = weighted_rate.clamp(
-          min=term_cfg.clip[0], max=term_cfg.clip[1]
-        )
+        weighted_rate = weighted_rate.clamp(min=term_cfg.clip[0], max=term_cfg.clip[1])
       value = weighted_rate * scale
       self._reward_buf += value
       self._episode_sums[name] += value

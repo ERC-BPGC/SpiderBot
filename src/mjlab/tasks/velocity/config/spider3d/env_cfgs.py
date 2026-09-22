@@ -93,9 +93,7 @@ def spider3d_rough_env_cfg(
     num_slots=1,
     track_air_time=True,
   )
-  cfg.scene.sensors = (cfg.scene.sensors or ()) + (
-    feet_ground_cfg,
-  )
+  cfg.scene.sensors = (cfg.scene.sensors or ()) + (feet_ground_cfg,)
 
   if cfg.scene.terrain is not None and cfg.scene.terrain.terrain_generator is not None:
     cfg.scene.terrain.terrain_generator.curriculum = True
