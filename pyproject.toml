@@ -149,6 +149,7 @@ indent-width = 2
 exclude = [
   "src/mjlab/utils/lab_api",
   "typings",
+  "sim2real/scservo_sdk",  # Preserve vendored SDK source verbatim.
 ]
 
 [tool.ruff.lint]
@@ -159,7 +160,7 @@ ignore = ["B011"]
 pythonVersion = "3.10"
 venvPath = "."
 venv = ".venv"
-ignore = ["./typings", "./src/mjlab/utils/lab_api", "./docs"]
+ignore = ["./typings", "./src/mjlab/utils/lab_api", "./docs", "./sim2real/scservo_sdk"]
 stubPath = "typings"
 
 [tool.ty.environment]

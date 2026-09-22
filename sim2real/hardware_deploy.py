@@ -1,7 +1,7 @@
 """
 Hardware deployment script for Hexapod using ONNX policy.
-Uses track.onnx (no IMU) — observation: joint_pos(12) + last_action(12) + command(3).
-No mjlab/brax/jax required. Only needs: onnxruntime, numpy, pynput, scservo_sdk.
+Select the exported policy with SPIDERBOT_POLICY_PATH.
+No mjlab/brax/jax required. Uses onnxruntime, numpy, and the bundled servo SDK.
 """
 
 import csv
@@ -14,10 +14,11 @@ import numpy as np
 import onnxruntime as ort
 
 # --- Hardware Imports ---
-SERVO_SDK_PATH = os.environ.get("SPIDERBOT_SERVO_SDK_PATH")
-if SERVO_SDK_PATH:
-  sys.path.insert(0, SERVO_SDK_PATH)
-# The board-specific SDK can be supplied through SPIDERBOT_SERVO_SDK_PATH.
+SERVO_SDK_PATH = os.environ.get(
+  "SPIDERBOT_SERVO_SDK_PATH", os.path.dirname(os.path.abspath(__file__))
+)
+sys.path.insert(0, SERVO_SDK_PATH)
+# Use the bundled SDK unless an external SDK directory is selected.
 servo_sdk = importlib.import_module("scservo_sdk")
 PortHandler = servo_sdk.PortHandler
 scscl = servo_sdk.scscl

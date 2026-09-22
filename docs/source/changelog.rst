@@ -8,6 +8,9 @@ Upcoming version (not yet released)
 Added
 ^^^^^
 
+- Bundled the Spiderbot servo SDK and tripod, ripple, and wave CPG scripts,
+  with automatic SDK discovery and configurable serial ports.
+
 - Added Spiderbot hardware deployment scripts, legacy policies, and SolidWorks
   mechanical assets with setup documentation.
 - Added configurable paths for standalone Spiderbot scripts.
