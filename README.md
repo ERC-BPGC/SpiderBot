@@ -39,7 +39,7 @@ MJLab training requires an NVIDIA GPU. The recommended setup uses
 [uv](https://docs.astral.sh/uv/):
 
 ```bash
-git clone --branch spiderbot-upstream-refresh https://github.com/Maker-Rat/mjlab_spiderbot.git
+git clone https://github.com/Maker-Rat/mjlab_spiderbot.git
 cd mjlab_spiderbot
 uv sync --extra cu128 --group dev
 ```
