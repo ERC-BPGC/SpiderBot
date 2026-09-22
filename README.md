@@ -172,9 +172,6 @@ They use the bundled SDK and accept the same `SPIDERBOT_SC_PORT`,
 policy controller. Check the servo IDs, home positions, and gait parameters at
 the top of the chosen script for your robot before running it.
 
-The SDK and CPG scripts were copied from the project's
-`Open-Source-Hexapod/testing/CPG` folder. The source Apache-2.0 license is
-preserved in `sim2real/scservo_sdk/LICENSE`; SDK source files are unmodified.
 
 ## Tests
 
