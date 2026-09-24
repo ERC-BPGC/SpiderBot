@@ -53,8 +53,9 @@ dependencies = [
 ]
 
 [project.urls]
-  "Bug Reports" = "https://github.com/mujocolab/mjlab/issues"
-  "Source" = "https://github.com/mujocolab/mjlab"
+  "Bug Reports" = "https://github.com/ERC-BPGC/SpiderBot/issues"
+  "Source" = "https://github.com/ERC-BPGC/SpiderBot"
+  "Homepage" = "https://erc-bpgc.github.io/SpiderBot/"
 
 [project.scripts]
 train = "mjlab.scripts.train:main"

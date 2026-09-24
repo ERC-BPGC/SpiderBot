@@ -6,7 +6,7 @@ Bug fixes and documentation improvements are always welcome.
 .. important::
 
    For new features, please
-   `open an issue <https://github.com/mujocolab/mjlab/issues>`_ first so
+   `open an issue <https://github.com/ERC-BPGC/SpiderBot/issues>`_ first so
    we can discuss whether it fits the project scope.
 
 
@@ -17,8 +17,8 @@ Clone the repository and sync dependencies:
 
 .. code-block:: bash
 
-   git clone https://github.com/mujocolab/mjlab.git && cd mjlab
-   uv sync
+   git clone https://github.com/ERC-BPGC/SpiderBot.git && cd SpiderBot
+   uv sync --extra cu128 --group dev
 
 Install pre-commit hooks to catch formatting and lint issues before each
 commit:
@@ -105,4 +105,3 @@ Any contributor with Claude Code installed can invoke them as slash commands.
 
 ``/commit-push-pr``
    Stage current changes, commit, push, and open a PR.
-

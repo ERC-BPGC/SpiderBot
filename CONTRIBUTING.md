@@ -1,25 +1,25 @@
-# Contributing
+# Contributing to Spiderbot
 
-Bug fixes and documentation improvements are always welcome. For new features, please open an issue first so we can discuss whether it fits and work out the design, as we're intentional about keeping the scope focused.
+The official project repository is
+[ERC-BPGC/SpiderBot](https://github.com/ERC-BPGC/SpiderBot).
+Please report Spiderbot bugs and discuss proposed features through its
+[issue tracker](https://github.com/ERC-BPGC/SpiderBot/issues).
 
 ## Workflow
 
-1. Fork the repository and create a feature branch.
-2. Make your changes.
-3. Ensure formatting, type checking, and tests pass: `make test-all`.
-4. Submit a pull request.
+1. Fork the club repository and create a feature branch.
+2. Follow the installation instructions in README.md.
+3. Make your changes and run `make check` and the relevant tests.
+4. Add user-facing changes to the Upcoming version section in
+   `docs/source/changelog.rst`, under Added, Changed, or Fixed.
+5. Run `make test` before opening a pull request against the club's `main`.
 
-Type checking (`make type`) is required, PRs that don't pass will be blocked. You can optionally install pre-commit hooks (`pre-commit install`) to catch issues early.
+Keep hardware-specific calibration and policy assumptions documented.
+The package retains the `mjlab` name for compatibility; this fork is not
+published as a replacement for the upstream mjlab package on PyPI.
 
-## Changelog
+## License and upstream attribution
 
-Add entries to the "Upcoming version" section in `docs/source/changelog.rst` under the appropriate category (Added / Changed / Fixed), following [Keep a Changelog](https://keepachangelog.com/) conventions.
-
-## Getting Help
-
-- **Issues**: https://github.com/mujocolab/mjlab/issues
-- **Discussions**: https://github.com/mujocolab/mjlab/discussions
-
-## License
-
-By contributing, you agree your contributions will be licensed under Apache 2.0.
+Contributions are licensed under Apache-2.0. Preserve existing copyright and
+third-party license notices. See LICENSE and README_mjlab.md for the underlying
+framework's attribution and citation.

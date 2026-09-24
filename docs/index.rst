@@ -1,6 +1,13 @@
 Welcome to mjlab!
 =================
 
+.. note::
+
+   These are the upstream mjlab framework docs retained for reference.
+   For Spiderbot setup, policies, hardware, and the paper, see the
+   `project README <https://github.com/ERC-BPGC/SpiderBot#readme>`_ and
+   `project website <https://erc-bpgc.github.io/SpiderBot/>`_.
+
 .. figure:: source/_static/mjlab-banner.jpg
    :width: 100%
    :alt: mjlab

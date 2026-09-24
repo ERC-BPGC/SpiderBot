@@ -61,13 +61,7 @@ docs-multiversion:
 docs-watch:
 	uv run --group docs sphinx-autobuild -j auto docs docs/_build
 
-.PHONY: publish-test
-publish-test: build
-	uv publish --publish-url https://test.pypi.org/legacy/
 
-.PHONY: publish
-publish: build
-	uv publish
 
 .PHONY: docker-build
 docker-build:

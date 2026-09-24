@@ -30,6 +30,9 @@ Added
 Changed
 ^^^^^^^
 
+- Replaced inherited project citation and support metadata with Spiderbot's,
+  and removed unused upstream publishing and assistant workflows.
+
 - Updated the Spiderbot README and project page with the published arXiv title,
   author order, paper links, and BibTeX citation.
 
