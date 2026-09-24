@@ -30,6 +30,9 @@ Added
 Changed
 ^^^^^^^
 
+- Updated the Spiderbot README and project page with the published arXiv title,
+  author order, paper links, and BibTeX citation.
+
 - Moved the maintained Spiderbot code and project page to ERC-BPGC/SpiderBot,
   preserving the previous organization main branch as V1.
 

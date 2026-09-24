@@ -3,11 +3,12 @@
 ![Spiderbot hexapod prototype](docs/assets/spidy.jpeg)
 
 This repository contains the simulation and learning codebase for the paper
-**Design and Development of an Open-Source Energy-Efficient Hexapod Research
-Platform**.
+**Spiderbot: An Open-Source Energy-Efficient Hexapod with Passive Gravity
+Compensation**.
 
 [![Project page](https://img.shields.io/badge/Project_Page-Visit-2563eb?style=flat-square)](https://erc-bpgc.github.io/SpiderBot/)
-<img src="https://img.shields.io/badge/arXiv-Coming_soon-b31b1b?style=flat-square" alt="arXiv paper coming soon" />
+[![arXiv](https://img.shields.io/badge/arXiv-2609.26989-b31b1b?style=flat-square)](https://arxiv.org/abs/2609.26989)
+[![Paper PDF](https://img.shields.io/badge/Paper-PDF-555555?style=flat-square)](https://arxiv.org/pdf/2609.26989)
 
 The code is built as a Spiderbot-focused fork of
 [mjlab](https://github.com/mujocolab/mjlab). It adds custom hexapod robot assets,
@@ -181,6 +182,23 @@ Run the velocity task smoke tests:
 
 ```bash
 uv run pytest tests/test_velocity_task.py
+```
+
+## Citation
+
+If you use Spiderbot, please cite:
+
+```bibtex
+@misc{sharma2026spiderbotopensourceenergyefficienthexapod,
+  title = {Spiderbot: An Open-Source Energy-Efficient Hexapod
+           with Passive Gravity Compensation},
+  author = {Ritwik Sharma and Vimarsh Shah and Saransh Agrawal},
+  year = {2026},
+  eprint = {2609.26989},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  url = {https://arxiv.org/abs/2609.26989}
+}
 ```
 
 ## Acknowledgements
